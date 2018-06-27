@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="YyIndustry">
+	<typeAlias alias="YyIndustry" type="com.yy.yyIndustry.model.YyIndustry"/>
+	
+    <sql id="getYyIndustryList_body">
+    	<dynamic prepend="WHERE">
+       		<isNotNull prepend="AND" property="id"> a.id=#id# </isNotNull>
+       		<isNotNull prepend="AND" property="name"> a.name=#name# </isNotNull>
+       		<isNotNull prepend="AND" property="state"> a.state=#state# </isNotNull>
+		</dynamic>
+        <isNotNull prepend="" property="sortColumn"> order by $sortColumn$ </isNotNull>
+    </sql>
+
+    <select id="getYyIndustryListCount" resultClass="int">
+         SELECT COUNT(*) FROM yy_industry a
+		<include refid="getYyIndustryList_body" />
+    </select>
+
+    <select id="getYyIndustryList" parameterClass="YyIndustry" resultClass="YyIndustry">
+    	SELECT a.id,a.name,a.state        FROM yy_industry a
+		<include refid="getYyIndustryList_body" />
+        limit #rowStart# , #rowCount# 
+    </select>
+
+    <select id="getYyIndustry" parameterClass="YyIndustry" resultClass="YyIndustry">
+        SELECT a.id,a.name,a.state        FROM yy_industry a
+		<include refid="getYyIndustryList_body" />
+    </select>
+
+    <insert id="insertYyIndustry">
+        INSERT INTO yy_industry ( 
+        <dynamic prepend="">
+			<isNotNull prepend="" property="name"> name </isNotNull>
+			<isNotNull prepend="," property="state"> state </isNotNull>
+        </dynamic>
+        )
+        VALUES (
+        <dynamic prepend="">
+		    <isNotNull prepend="" property="name"> #name# </isNotNull>
+		    <isNotNull prepend="," property="state"> #state# </isNotNull>
+        </dynamic>
+        )
+        <selectKey keyProperty="id" resultClass="int">
+			SELECT @@IDENTITY AS id 
+		</selectKey>
+    </insert>
+
+    <update id="updateYyIndustry">
+        UPDATE yy_industry
+        <dynamic prepend="SET">
+		    <isNotNull prepend="," property="name"> name=#name# </isNotNull>
+		    <isNotNull prepend="," property="state"> state=#state# </isNotNull>
+        </dynamic>
+    	where id = #id#
+    </update>
+    
+    <delete id="removeYyIndustry">
+        delete from yy_industry where id = #id#
+    </delete>
+</sqlMap>

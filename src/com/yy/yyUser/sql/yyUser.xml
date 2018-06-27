@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="YyUser">
+	<typeAlias alias="YyUser" type="com.yy.yyUser.model.YyUser"/>
+	
+    <sql id="getYyUserList_body">
+    	<dynamic prepend="WHERE">
+       		<isNotNull prepend="AND" property="id"> a.id=#id# </isNotNull>
+       		<isNotNull prepend="AND" property="name"> a.name like concat('%',#name#,'%') </isNotNull>
+       		<isNotNull prepend="AND" property="nick_name"> a.nick_name=#nick_name# </isNotNull>
+       		<isNotNull prepend="AND" property="user_number"> a.user_number=#user_number# </isNotNull>
+       		<isNotNull prepend="AND" property="company_id"> a.company_id=#company_id# </isNotNull>
+       		<isNotNull prepend="AND" property="is_manager"> a.is_manager=#is_manager# </isNotNull>
+       		<isNotNull prepend="AND" property="parent_id"> a.parent_id=#parent_id# </isNotNull>
+       		<isNotNull prepend="AND" property="parent_ids"> a.parent_ids=#parent_ids# </isNotNull>
+       		<isNotNull prepend="AND" property="sex"> a.sex=#sex# </isNotNull>
+       		<isNotNull prepend="AND" property="login_name"> a.login_name=#login_name# </isNotNull>
+       		<isNotNull prepend="AND" property="password"> a.password=#password# </isNotNull>
+       		<isNotNull prepend="AND" property="state"> a.state=#state# </isNotNull>
+       		<isNotNull prepend="AND" property="head_img"> a.head_img=#head_img# </isNotNull>
+       		<isNotNull prepend="AND" property="phone"> a.phone=#phone# </isNotNull>
+       		<isNotNull prepend="AND" property="mail"> a.mail=#mail# </isNotNull>
+       		<isNotNull prepend="AND" property="lower_level_number"> a.lower_level_number=#lower_level_number# </isNotNull>
+       		<isNotNull prepend="AND" property="parent_name"> a.parent_name=#parent_name# </isNotNull>
+       		<isNotNull prepend="AND" property="create_time"> a.create_time=#create_time# </isNotNull>
+       		<isNotNull prepend="AND" property="job"> a.job=#job# </isNotNull>
+       		<isNotNull prepend="AND" property="job_level"> a.job_level=#job_level# </isNotNull>
+       		<isNotNull prepend="AND" property="department"> a.department=#department# </isNotNull>
+       		<isNotNull prepend="AND" property="job_info"> a.job_info=#job_info# </isNotNull>
+       		<isNotNull prepend="AND" property="history_job"> a.history_job=#history_job# </isNotNull>
+       		<isNotNull prepend="AND" property="remark1"> a.remark1=#remark1# </isNotNull>
+       		<isNotNull prepend="AND" property="remark2"> a.remark2=#remark2# </isNotNull>
+       		<isNotNull prepend="AND" property="remark3"> a.remark3=#remark3# </isNotNull>
+       		<isNotNull prepend="AND" property="company_name"> a.company_name=#company_name# </isNotNull>
+       		<isNotNull prepend="AND" property="openId"> a.openId=#openId# </isNotNull>
+       		<isNotNull prepend="AND" property="token"> a.token=#token# </isNotNull>
+       		<isNotNull prepend="AND" property="birthday"> a.birthday=#birthday# </isNotNull>
+       		<isNotNull prepend="AND" property="is_super_manager"> a.is_super_manager=#is_super_manager# </isNotNull>
+       		<isNotNull prepend="AND" property="education"> a.education=#education# </isNotNull>
+       		<isNotNull prepend="AND" property="parent_flag"> a.parent_id is null </isNotNull>
+       		<isNotNull prepend="AND" property="user_id"> a.id<![CDATA[ <> ]]>#user_id# </isNotNull>
+		</dynamic>
+        <isNotNull prepend="" property="sortColumn"> order by $sortColumn$ </isNotNull>
+    </sql>
+
+    <select id="getYyUserListCount" resultClass="int">
+         SELECT COUNT(*) FROM yy_user a
+<!--          left join yy_function b on a.job_info = b.id -->
+		<include refid="getYyUserList_body" />
+    </select>
+
+    <select id="getYyUserList" parameterClass="YyUser" resultClass="YyUser">
+    	SELECT a.id,a.name,a.nick_name,a.user_number,a.company_id,a.is_manager,a.parent_id,a.parent_ids,a.sex,a.login_name,a.password,a.state,a.head_img,a.phone,a.mail,a.lower_level_number,a.parent_name,a.create_time,a.job,a.job_level,a.department,a.job_info,a.history_job,a.remark1,a.remark2,a.remark3,a.company_name,a.openId,a.token,a.is_super_manager,a.birthday,a.education        FROM yy_user a
+<!-- 		left join yy_function b on a.job_info = b.id -->
+		<include refid="getYyUserList_body" />
+        limit #rowStart# , #rowCount# 
+    </select>
+
+    <select id="getYyUser" parameterClass="YyUser" resultClass="YyUser">
+        SELECT a.id,a.name,a.nick_name,a.user_number,a.company_id,a.is_manager,a.parent_id,a.parent_ids,a.sex,a.login_name,a.password,a.state,a.head_img,a.phone,a.mail,a.lower_level_number,a.parent_name,a.create_time,a.job,a.job_level,a.department,a.job_info,a.history_job,a.remark1,a.remark2,a.remark3,a.company_name,a.openId,a.token,a.is_super_manager,a.birthday,a.education        FROM yy_user a
+<!-- 		left join yy_function b on a.job_info = b.id -->
+		<include refid="getYyUserList_body" />
+    </select>
+
+    <insert id="insertYyUser">
+        INSERT INTO yy_user ( 
+        <dynamic prepend="">
+			<isNotNull prepend="" property="name"> name </isNotNull>
+			<isNotNull prepend="," property="nick_name"> nick_name </isNotNull>
+			<isNotNull prepend="," property="user_number"> user_number </isNotNull>
+			<isNotNull prepend="," property="company_id"> company_id </isNotNull>
+			<isNotNull prepend="," property="is_manager"> is_manager </isNotNull>
+			<isNotNull prepend="," property="parent_id"> parent_id </isNotNull>
+			<isNotNull prepend="," property="parent_ids"> parent_ids </isNotNull>
+			<isNotNull prepend="," property="sex"> sex </isNotNull>
+			<isNotNull prepend="," property="login_name"> login_name </isNotNull>
+			<isNotNull prepend="," property="password"> password </isNotNull>
+			<isNotNull prepend="," property="state"> state </isNotNull>
+			<isNotNull prepend="," property="head_img"> head_img </isNotNull>
+			<isNotNull prepend="," property="phone"> phone </isNotNull>
+			<isNotNull prepend="," property="mail"> mail </isNotNull>
+			<isNotNull prepend="," property="lower_level_number"> lower_level_number </isNotNull>
+			<isNotNull prepend="," property="parent_name"> parent_name </isNotNull>
+			<isNotNull prepend="," property="create_time"> create_time </isNotNull>
+			<isNotNull prepend="," property="job"> job </isNotNull>
+			<isNotNull prepend="," property="job_level"> job_level </isNotNull>
+			<isNotNull prepend="," property="department"> department </isNotNull>
+			<isNotNull prepend="," property="job_info"> job_info </isNotNull>
+			<isNotNull prepend="," property="history_job"> history_job </isNotNull>
+			<isNotNull prepend="," property="remark1"> remark1 </isNotNull>
+			<isNotNull prepend="," property="remark2"> remark2 </isNotNull>
+			<isNotNull prepend="," property="remark3"> remark3 </isNotNull>
+			<isNotNull prepend="," property="company_name"> company_name </isNotNull>
+			<isNotNull prepend="," property="openId"> openId </isNotNull>
+			<isNotNull prepend="," property="token"> token </isNotNull>
+			<isNotNull prepend="," property="is_super_manager"> is_super_manager </isNotNull>
+			<isNotNull prepend="," property="birthday"> birthday </isNotNull>
+			<isNotNull prepend="," property="education"> education </isNotNull>
+        </dynamic>
+        )
+        VALUES (
+        <dynamic prepend="">
+		    <isNotNull prepend="" property="name"> #name# </isNotNull>
+		    <isNotNull prepend="," property="nick_name"> #nick_name# </isNotNull>
+		    <isNotNull prepend="," property="user_number"> #user_number# </isNotNull>
+		    <isNotNull prepend="," property="company_id"> #company_id# </isNotNull>
+		    <isNotNull prepend="," property="is_manager"> #is_manager# </isNotNull>
+		    <isNotNull prepend="," property="parent_id"> #parent_id# </isNotNull>
+		    <isNotNull prepend="," property="parent_ids"> #parent_ids# </isNotNull>
+		    <isNotNull prepend="," property="sex"> #sex# </isNotNull>
+		    <isNotNull prepend="," property="login_name"> #login_name# </isNotNull>
+		    <isNotNull prepend="," property="password"> #password# </isNotNull>
+		    <isNotNull prepend="," property="state"> #state# </isNotNull>
+		    <isNotNull prepend="," property="head_img"> #head_img# </isNotNull>
+		    <isNotNull prepend="," property="phone"> #phone# </isNotNull>
+		    <isNotNull prepend="," property="mail"> #mail# </isNotNull>
+		    <isNotNull prepend="," property="lower_level_number"> #lower_level_number# </isNotNull>
+		    <isNotNull prepend="," property="parent_name"> #parent_name# </isNotNull>
+		    <isNotNull prepend="," property="create_time"> #create_time# </isNotNull>
+		    <isNotNull prepend="," property="job"> #job# </isNotNull>
+		    <isNotNull prepend="," property="job_level"> #job_level# </isNotNull>
+		    <isNotNull prepend="," property="department"> #department# </isNotNull>
+		    <isNotNull prepend="," property="job_info"> #job_info# </isNotNull>
+		    <isNotNull prepend="," property="history_job"> #history_job# </isNotNull>
+		    <isNotNull prepend="," property="remark1"> #remark1# </isNotNull>
+		    <isNotNull prepend="," property="remark2"> #remark2# </isNotNull>
+		    <isNotNull prepend="," property="remark3"> #remark3# </isNotNull>
+		    <isNotNull prepend="," property="company_name"> #company_name# </isNotNull>
+		    <isNotNull prepend="," property="openId"> #openId# </isNotNull>
+		    <isNotNull prepend="," property="token"> #token# </isNotNull>
+		    <isNotNull prepend="," property="is_super_manager"> #is_super_manager# </isNotNull>
+		    <isNotNull prepend="," property="birthday"> #birthday# </isNotNull>
+		    <isNotNull prepend="," property="education"> #education# </isNotNull>
+        </dynamic>
+        )
+        <selectKey keyProperty="id" resultClass="long">
+			SELECT @@IDENTITY AS id 
+		</selectKey>
+    </insert>
+
+    <update id="updateYyUser">
+        UPDATE yy_user
+        <dynamic prepend="SET">
+		    <isNotNull prepend="," property="name"> name=#name# </isNotNull>
+		    <isNotNull prepend="," property="nick_name"> nick_name=#nick_name# </isNotNull>
+		    <isNotNull prepend="," property="user_number"> user_number=#user_number# </isNotNull>
+		    <isNotNull prepend="," property="company_id"> company_id=#company_id# </isNotNull>
+		    <isNotNull prepend="," property="is_manager"> is_manager=#is_manager# </isNotNull>
+		    <isNotNull prepend="," property="parent_id"> parent_id=#parent_id# </isNotNull>
+		    <isNotNull prepend="," property="parent_ids"> parent_ids=#parent_ids# </isNotNull>
+		    <isNotNull prepend="," property="sex"> sex=#sex# </isNotNull>
+		    <isNotNull prepend="," property="login_name"> login_name=#login_name# </isNotNull>
+		    <isNotNull prepend="," property="password"> password=#password# </isNotNull>
+		    <isNotNull prepend="," property="state"> state=#state# </isNotNull>
+		    <isNotNull prepend="," property="head_img"> head_img=#head_img# </isNotNull>
+		    <isNotNull prepend="," property="phone"> phone=#phone# </isNotNull>
+		    <isNotNull prepend="," property="mail"> mail=#mail# </isNotNull>
+		    <isNotNull prepend="," property="lower_level_number"> lower_level_number=#lower_level_number# </isNotNull>
+		    <isNotNull prepend="," property="parent_name"> parent_name=#parent_name# </isNotNull>
+		    <isNotNull prepend="," property="create_time"> create_time=#create_time# </isNotNull>
+		    <isNotNull prepend="," property="job"> job=#job# </isNotNull>
+		    <isNotNull prepend="," property="job_level"> job_level=#job_level# </isNotNull>
+		    <isNotNull prepend="," property="department"> department=#department# </isNotNull>
+		    <isNotNull prepend="," property="job_info"> job_info=#job_info# </isNotNull>
+		    <isNotNull prepend="," property="history_job"> history_job=#history_job# </isNotNull>
+		    <isNotNull prepend="," property="remark1"> remark1=#remark1# </isNotNull>
+		    <isNotNull prepend="," property="remark2"> remark2=#remark2# </isNotNull>
+		    <isNotNull prepend="," property="remark3"> remark3=#remark3# </isNotNull>
+		    <isNotNull prepend="," property="company_name"> company_name=#company_name# </isNotNull>
+		    <isNotNull prepend="," property="openId"> openId=#openId# </isNotNull>
+		    <isNotNull prepend="," property="token"> token=#token# </isNotNull>
+		    <isNotNull prepend="," property="is_super_manager"> is_super_manager=#is_super_manager# </isNotNull>
+		    <isNotNull prepend="," property="birthday"> birthday=#birthday# </isNotNull>
+		    <isNotNull prepend="," property="education"> education=#education# </isNotNull>
+        </dynamic>
+    	where id = #id#
+    </update>
+    
+    <update id="updateCompany_name">
+        UPDATE yy_user SET company_name=#company_name# where company_id=#company_id#
+    </update>
+    
+    <update id="unBind">
+        UPDATE yy_user SET openId=null where id = #id#
+    </update>
+    
+    <delete id="removeYyUser">
+        delete from yy_user where id = #id#
+    </delete>
+    
+    
+    <select id="userAnalysis" parameterClass="YyUser" resultClass="YyUser">
+         select COUNT(*) as userCount, date_format(create_time, '%Y-%m') as mouthA from yy_user where DATE_FORMAT(create_time, '%Y')=#year_str# group by mouthA;
+    </select>
+    
+    <select id="userCountAnalysis" parameterClass="YyUser" resultClass="YyUser">
+         select COUNT(*) as userCount from yy_user where DATE_FORMAT(create_time, '%Y-%m')<![CDATA[ <= ]]>#year_str# and DATE_FORMAT(create_time, '%Y')<![CDATA[ >=2016 ]]>;
+    </select>
+    
+    <update id="updateParent_name">
+        UPDATE yy_user SET parent_name=#parent_name# where parent_id=#parent_id#
+    </update>
+    
+    <select id="checkLoginName" parameterClass="YyUser" resultClass="int">
+    	 select COUNT(*) from yy_user where login_name=#login_name#
+    	 <isNotNull prepend="AND" property="id"> id<![CDATA[ <> ]]>#id# </isNotNull>
+    </select>
+    
+</sqlMap>

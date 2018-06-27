@@ -1,0 +1,103 @@
+/*首页*/
+@media screen and (max-width: 1000px) {   
+.s_box1{
+	width: 100%;
+	min-width: 1000px;
+	margin: 0 auto;
+}
+.s_box1 .s_logo{
+	min-width: 1000px;
+	width: 100%px;
+	height: 72px;
+	background: #171e2d;
+}
+.s_box1 .s_logo img{
+    width: 140px;
+    height: 39px;
+    margin: 16px 0 17px 56px;
+}
+.s_box1 .s_sec1{
+	background-image: url(../img/s_bg1.png);
+    background-position: 100% 100%;
+    width: 1000px;
+    min-width: 100%;
+    height: 728px;
+    padding-top: 21px;
+    box-sizing: border-box;
+}
+.s_box1 .s_a2 img{
+	width: 308px;
+	height: 510px;
+}
+.s_box1 .s_a2{
+	width: 308px;
+	height: 510px;
+	overflow: hidden;
+	background: #fff;
+	margin-left: 25%;
+	float: left; 
+}
+.s_box1 .s_sec1 .s_a3{
+    width: 423px;
+    float: right;
+    text-align: right;
+    margin: 72px 0 0 0%;
+}
+.s_box1 .s_sec1 .s_a4 img{
+	width: 152px;
+	height: 174px;
+}
+.s_box1 .s_sec1 .s_a5{
+	display: inline-block;
+	font-size: 36px;
+	color: #fff;
+    margin: 33px 0 24px 0;
+}
+.s_box1 .s_sec1 .s_a6{
+	border-top: solid 1px #ffffff;
+    width: 423px;
+	height: 125px;
+	font-family: PingFangSC;
+	font-size: 18px;
+	text-align: left;
+	color: #ffffff;
+    padding-top: 24px;
+    box-sizing: border-box;
+}
+.s_box1 .sul{
+	margin-top: 52px;
+}
+.s_box1 .sul li{
+	float: left;
+	height: 96px;
+	font-family: FZLTXHK-GBK1-0;
+	font-size: 28px;
+	line-height: 1.71;
+	text-align: center;
+	color: #ffffff;
+}
+.s_box1 .sul li dt span{
+	font-family: FZLTZHK-GBK1-0;
+	font-size: 48px;
+	line-height: 1;
+}
+.s_box1 .sul li:nth-child(1){
+	/*margin-left: 289px;*/
+}
+.s_box1 .sul li:nth-child(2){
+	/*margin-left: 102px;*/
+}
+.s_box1 .sul li:nth-child(3){
+	/*margin-left: 108px;*/
+}
+.s_box1 .sul li:nth-child(4){
+	/*margin-left: 129px;*/
+}
+
+
+
+
+
+
+/*响应式结束*/
+}

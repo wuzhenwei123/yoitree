@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="YyUserFunction">
+	<typeAlias alias="YyUserFunction" type="com.yy.yyUserFunction.model.YyUserFunction"/>
+	
+    <sql id="getYyUserFunctionList_body">
+    	<dynamic prepend="WHERE">
+       		<isNotNull prepend="AND" property="id"> a.id=#id# </isNotNull>
+       		<isNotNull prepend="AND" property="user_id"> a.user_id=#user_id# </isNotNull>
+       		<isNotNull prepend="AND" property="function_id"> a.function_id=#function_id# </isNotNull>
+		</dynamic>
+        <isNotNull prepend="" property="sortColumn"> order by $sortColumn$ </isNotNull>
+    </sql>
+
+    <select id="getYyUserFunctionListCount" resultClass="int">
+         SELECT COUNT(*) FROM yy_user_function a
+         left join yy_function b on a.function_id = b.id
+		<include refid="getYyUserFunctionList_body" />
+    </select>
+
+    <select id="getYyUserFunctionList" parameterClass="YyUserFunction" resultClass="YyUserFunction">
+    	SELECT a.id,a.user_id,a.function_id,b.name as function_name        FROM yy_user_function a
+    	left join yy_function b on a.function_id = b.id
+		<include refid="getYyUserFunctionList_body" />
+        limit #rowStart# , #rowCount# 
+    </select>
+
+    <select id="getYyUserFunction" parameterClass="YyUserFunction" resultClass="YyUserFunction">
+        SELECT a.id,a.user_id,a.function_id,b.name as function_name        FROM yy_user_function a
+        left join yy_function b on a.function_id = b.id
+		<include refid="getYyUserFunctionList_body" />
+    </select>
+
+    <insert id="insertYyUserFunction">
+        INSERT INTO yy_user_function ( 
+        <dynamic prepend="">
+			<isNotNull prepend="" property="user_id"> user_id </isNotNull>
+			<isNotNull prepend="," property="function_id"> function_id </isNotNull>
+        </dynamic>
+        )
+        VALUES (
+        <dynamic prepend="">
+		    <isNotNull prepend="" property="user_id"> #user_id# </isNotNull>
+		    <isNotNull prepend="," property="function_id"> #function_id# </isNotNull>
+        </dynamic>
+        )
+        <selectKey keyProperty="id" resultClass="int">
+			SELECT @@IDENTITY AS id 
+		</selectKey>
+    </insert>
+
+    <update id="updateYyUserFunction">
+        UPDATE yy_user_function
+        <dynamic prepend="SET">
+		    <isNotNull prepend="," property="user_id"> user_id=#user_id# </isNotNull>
+		    <isNotNull prepend="," property="function_id"> function_id=#function_id# </isNotNull>
+        </dynamic>
+    	where id = #id#
+    </update>
+    
+    <delete id="removeYyUserFunction">
+        delete from yy_user_function where id = #id#
+    </delete>
+</sqlMap>

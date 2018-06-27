@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="YyUserCourse">
+	<typeAlias alias="YyUserCourse" type="com.yy.yyUserCourse.model.YyUserCourse"/>
+	
+    <sql id="getYyUserCourseList_body">
+    	<dynamic prepend="WHERE">
+       		<isNotNull prepend="AND" property="id"> a.id=#id# </isNotNull>
+       		<isNotNull prepend="AND" property="user_id"> a.user_id=#user_id# </isNotNull>
+       		<isNotNull prepend="AND" property="course_id"> a.course_id=#course_id# </isNotNull>
+       		<isNotNull prepend="AND" property="course_classify_id"> a.course_classify_id=#course_classify_id# </isNotNull>
+       		<isNotNull prepend="AND" property="study_state"> a.study_state=#study_state# </isNotNull>
+       		<isNotNull prepend="AND" property="style"> a.style=#style# </isNotNull>
+       		<isNotNull prepend="AND" property="over_time"> a.over_time<![CDATA[ >= ]]>#over_time# </isNotNull>
+       		<isNotNull prepend="AND" property="start_time"> a.start_time<![CDATA[ <= ]]>#start_time# </isNotNull>
+       		<isNotNull prepend="AND" property="user_parent_id"> f.parent_id=#user_parent_id# </isNotNull>
+		</dynamic>
+        <isNotNull prepend="" property="sortColumn"> order by $sortColumn$ </isNotNull>
+    </sql>
+
+    <select id="getYyUserCourseListCount" resultClass="int">
+         SELECT COUNT(*) FROM yy_user_course a
+         left join yy_user f on a.user_id = f.id
+		<include refid="getYyUserCourseList_body" />
+    </select>
+
+    <select id="getYyUserCourseList" parameterClass="YyUserCourse" resultClass="YyUserCourse">
+    	SELECT a.id,a.user_id,a.course_id,a.course_classify_id,a.study_state,a.style,a.over_time,a.start_time        FROM yy_user_course a
+    	left join yy_user f on a.user_id = f.id
+		<include refid="getYyUserCourseList_body" />
+        limit #rowStart# , #rowCount# 
+    </select>
+
+    <select id="getYyUserCourse" parameterClass="YyUserCourse" resultClass="YyUserCourse">
+        SELECT a.id,a.user_id,a.course_id,a.course_classify_id,a.study_state,a.style,a.over_time,a.start_time        FROM yy_user_course a
+        left join yy_user f on a.user_id = f.id
+		<include refid="getYyUserCourseList_body" />
+    </select>
+
+    <insert id="insertYyUserCourse">
+        INSERT INTO yy_user_course ( 
+        <dynamic prepend="">
+			<isNotNull prepend="" property="user_id"> user_id </isNotNull>
+			<isNotNull prepend="," property="course_id"> course_id </isNotNull>
+			<isNotNull prepend="," property="course_classify_id"> course_classify_id </isNotNull>
+			<isNotNull prepend="," property="study_state"> study_state </isNotNull>
+			<isNotNull prepend="," property="style"> style </isNotNull>
+			<isNotNull prepend="," property="over_time"> over_time </isNotNull>
+			<isNotNull prepend="," property="start_time"> start_time </isNotNull>
+        </dynamic>
+        )
+        VALUES (
+        <dynamic prepend="">
+		    <isNotNull prepend="" property="user_id"> #user_id# </isNotNull>
+		    <isNotNull prepend="," property="course_id"> #course_id# </isNotNull>
+		    <isNotNull prepend="," property="course_classify_id"> #course_classify_id# </isNotNull>
+		    <isNotNull prepend="," property="study_state"> #study_state# </isNotNull>
+		    <isNotNull prepend="," property="style"> #style# </isNotNull>
+		    <isNotNull prepend="," property="over_time"> #over_time# </isNotNull>
+		    <isNotNull prepend="," property="start_time"> #start_time# </isNotNull>
+        </dynamic>
+        )
+        <selectKey keyProperty="id" resultClass="long">
+			SELECT @@IDENTITY AS id 
+		</selectKey>
+    </insert>
+
+    <update id="updateYyUserCourse">
+        UPDATE yy_user_course
+        <dynamic prepend="SET">
+		    <isNotNull prepend="," property="user_id"> user_id=#user_id# </isNotNull>
+		    <isNotNull prepend="," property="course_id"> course_id=#course_id# </isNotNull>
+		    <isNotNull prepend="," property="course_classify_id"> course_classify_id=#course_classify_id# </isNotNull>
+		    <isNotNull prepend="," property="study_state"> study_state=#study_state# </isNotNull>
+		    <isNotNull prepend="," property="style"> style=#style# </isNotNull>
+		    <isNotNull prepend="," property="over_time"> over_time=#over_time# </isNotNull>
+		    <isNotNull prepend="," property="start_time"> start_time=#start_time# </isNotNull>
+        </dynamic>
+    	where id = #id#
+    </update>
+    
+    <delete id="removeYyUserCourse">
+        delete from yy_user_course where id = #id#
+    </delete>
+    
+    <delete id="removeYyUserCourseByOther">
+        delete from yy_user_course 
+        <dynamic prepend="WHERE">
+       		<isNotNull prepend="AND" property="id"> id=#id# </isNotNull>
+       		<isNotNull prepend="AND" property="user_id"> user_id=#user_id# </isNotNull>
+       		<isNotNull prepend="AND" property="course_id"> course_id=#course_id# </isNotNull>
+       		<isNotNull prepend="AND" property="course_classify_id"> course_classify_id=#course_classify_id# </isNotNull>
+       		<isNotNull prepend="AND" property="study_state"> study_state=#study_state# </isNotNull>
+       		<isNotNull prepend="AND" property="style"> style=#style# </isNotNull>
+		</dynamic>
+    </delete>
+    
+    <select id="getUserStudyList" parameterClass="YyUserCourse" resultClass="YyUserCourse">
+         SELECT a.*,b.id as lessonId,b.name as lessonName,c.id as moduleId,c.name as moduleName,d.id as themeId,d.name as themeName FROM yy_user_course a
+         left join yy_course_classify b on a.course_classify_id = b.id
+         left join yy_course_classify c on b.parent_id = c.id
+         left join yy_course_classify d on c.parent_id = d.id
+         <include refid="getYyUserCourseList_body" />
+         
+         group by a.course_classify_id
+    </select>
+    
+    <select id="getUserStudyStateList" parameterClass="YyUserCourse" resultClass="YyUserCourse">
+         SELECT count(*) as count,a.study_state,a.course_classify_id,a.over_time FROM yy_user_course a
+         <include refid="getYyUserCourseList_body" />
+         group by a.study_state,a.course_classify_id
+    </select>
+    
+    <update id="updateYyUserCourseByUserAndPointId">
+        UPDATE yy_user_course set study_state=#study_state# 
+    	where user_id=#user_id# and course_id=#course_id#
+    </update>
+    
+    <select id="getUserStudyListAll" parameterClass="YyUserCourse" resultClass="YyUserCourse">
+         SELECT a.*,b.id as lessonId,b.name as lessonName,c.id as moduleId,c.name as moduleName,d.id as themeId,d.name as themeName FROM yy_user_course a
+         left join yy_course_classify b on a.course_classify_id = b.id
+         left join yy_course_classify c on b.parent_id = c.id
+         left join yy_course_classify d on c.parent_id = d.id
+         <dynamic prepend="WHERE">
+       		<isNotNull prepend="AND" property="id"> a.id=#id# </isNotNull>
+       		<isNotNull prepend="AND" property="user_id"> a.user_id=#user_id# </isNotNull>
+       		<isNotNull prepend="AND" property="course_id"> a.course_id=#course_id# </isNotNull>
+       		<isNotNull prepend="AND" property="course_classify_id"> a.course_classify_id=#course_classify_id# </isNotNull>
+       		<isNotNull prepend="AND" property="study_state"> a.study_state=#study_state# </isNotNull>
+       		<isNotNull prepend="AND" property="style"> a.style=#style# </isNotNull>
+       		<isNotNull prepend="AND" property="over_time"> a.over_time=#over_time# </isNotNull>
+       		<isNotNull prepend="AND" property="moduleId"> c.id=#moduleId# </isNotNull>
+       		<isNotNull prepend="AND" property="themeId"> d.id=#themeId# </isNotNull>
+		</dynamic>
+        <isNotNull prepend="" property="sortColumn"> order by $sortColumn$ </isNotNull>
+    </select>
+    
+    
+    <select id="getYyUserCourseParent" parameterClass="YyUserCourse" resultClass="YyUserCourse">
+        SELECT a.*,b.img_url,b.id as lessonId,b.name as lessonName,c.id as moduleId,c.name as moduleName,d.id as themeId,d.name as themeName        
+        
+        FROM yy_user_course a
+        left join yy_course_classify b on a.course_classify_id = b.id
+        left join yy_course_classify c on b.parent_id = c.id
+        left join yy_course_classify d on c.parent_id = d.id
+		<include refid="getYyUserCourseList_body" />
+		group by a.course_classify_id
+    </select>
+    
+    <select id="getYyUserCourseByUser" parameterClass="YyUserCourse" resultClass="YyUserCourse">
+        SELECT a.*,b.img_url,b.id as lessonId,b.name as lessonName,c.id as moduleId,c.name as moduleName,d.id as themeId,d.name as themeName,
+        e.name as course_name       
+        
+        FROM yy_user_course a
+        left join yy_course_classify b on a.course_classify_id = b.id
+        left join yy_course_classify c on b.parent_id = c.id
+        left join yy_course_classify d on c.parent_id = d.id
+        left join yy_course e on a.course_id = e.id
+        left join yy_user f on a.user_id = f.id
+		<dynamic prepend="WHERE">
+       		<isNotNull prepend="AND" property="id"> a.id=#id# </isNotNull>
+       		<isNotNull prepend="AND" property="user_id"> a.user_id=#user_id# </isNotNull>
+       		<isNotNull prepend="AND" property="course_id"> a.course_id=#course_id# </isNotNull>
+       		<isNotNull prepend="AND" property="course_classify_id"> a.course_classify_id=#course_classify_id# </isNotNull>
+       		<isNotNull prepend="AND" property="study_state"> a.study_state=#study_state# </isNotNull>
+       		<isNotNull prepend="AND" property="style"> a.style=#style# </isNotNull>
+       		<isNotNull prepend="AND" property="over_time"> a.over_time=#over_time# </isNotNull>
+       		<isNotNull prepend="AND" property="user_parent_id"> f.parent_id=#user_parent_id# </isNotNull>
+		</dynamic>
+        <isNotNull prepend="" property="sortColumn"> order by $sortColumn$ </isNotNull>
+		group by a.course_classify_id
+    </select>
+    
+    <select id="getStudyUser" parameterClass="YyUserCourse" resultClass="YyUserCourse">
+        SELECT a.*,f.name as user_name       
+        
+        FROM yy_user_course a
+        left join yy_user f on a.user_id = f.id
+		<dynamic prepend="WHERE">
+       		<isNotNull prepend="AND" property="id"> a.id=#id# </isNotNull>
+       		<isNotNull prepend="AND" property="user_id"> a.user_id=#user_id# </isNotNull>
+       		<isNotNull prepend="AND" property="course_id"> a.course_id=#course_id# </isNotNull>
+       		<isNotNull prepend="AND" property="course_classify_id"> a.course_classify_id=#course_classify_id# </isNotNull>
+       		<isNotNull prepend="AND" property="study_state"> a.study_state=#study_state# </isNotNull>
+       		<isNotNull prepend="AND" property="style"> a.style=#style# </isNotNull>
+       		<isNotNull prepend="AND" property="over_time"> a.over_time=#over_time# </isNotNull>
+       		<isNotNull prepend="AND" property="user_parent_id"> f.parent_id=#user_parent_id# </isNotNull>
+		</dynamic>
+        group by a.user_id
+    </select>
+    
+    
+    <select id="getYyUserCourseState" parameterClass="YyUserCourse" resultClass="YyUserCourse">
+        SELECT sum(study_state) as study_state,count(*) as total,a.style,a.user_id,a.course_id,a.over_time,a.start_time,
+        a.course_classify_id,b.img_url,b.id as lessonId,b.name as lessonName,c.id as moduleId,
+        c.name as moduleName,d.id as themeId,d.name as themeName,
+        e.name as course_name,a.id     
+        FROM yy_user_course a
+        left join yy_course_classify b on a.course_classify_id = b.id
+        left join yy_course_classify c on b.parent_id = c.id
+        left join yy_course_classify d on c.parent_id = d.id
+        left join yy_course e on a.course_id = e.id
+        left join yy_user f on a.user_id = f.id
+		<dynamic prepend="WHERE">
+       		<isNotNull prepend="AND" property="id"> a.id=#id# </isNotNull>
+       		<isNotNull prepend="AND" property="user_id"> a.user_id=#user_id# </isNotNull>
+       		<isNotNull prepend="AND" property="course_id"> a.course_id=#course_id# </isNotNull>
+       		<isNotNull prepend="AND" property="course_classify_id"> a.course_classify_id=#course_classify_id# </isNotNull>
+       		<isNotNull prepend="AND" property="study_state"> a.study_state=#study_state# </isNotNull>
+       		<isNotNull prepend="AND" property="style"> a.style=#style# </isNotNull>
+       		<isNotNull prepend="AND" property="over_time"> a.over_time=#over_time# </isNotNull>
+       		<isNotNull prepend="AND" property="user_parent_id"> f.parent_id=#user_parent_id# </isNotNull>
+		</dynamic>
+        <isNotNull prepend="" property="sortColumn"> order by $sortColumn$ </isNotNull>
+		group by a.course_classify_id
+    </select>
+    
+    <select id="getDataByUserAndClassify" parameterClass="YyUserCourse" resultClass="YyUserCourse">
+        SELECT a.id,a.user_id,a.course_id,a.course_classify_id,a.study_state,a.style,a.over_time,a.start_time        FROM yy_user_course a
+		<include refid="getYyUserCourseList_body" />
+		group by a.course_classify_id
+    </select>
+    
+</sqlMap>

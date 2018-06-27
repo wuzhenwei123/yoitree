@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="YyCompany">
+	<typeAlias alias="YyCompany" type="com.yy.yyCompany.model.YyCompany"/>
+	
+    <sql id="getYyCompanyList_body">
+    	<dynamic prepend="WHERE">
+       		<isNotNull prepend="AND" property="id"> a.id=#id# </isNotNull>
+       		<isNotNull prepend="AND" property="name"> a.name=#name# </isNotNull>
+       		<isNotNull prepend="AND" property="code"> a.code=#code# </isNotNull>
+       		<isNotNull prepend="AND" property="credit_code"> a.credit_code=#credit_code# </isNotNull>
+       		<isNotNull prepend="AND" property="industry_id"> a.industry_id=#industry_id# </isNotNull>
+       		<isNotNull prepend="AND" property="industry_name"> a.industry_name=#industry_name# </isNotNull>
+       		<isNotNull prepend="AND" property="employees_id"> a.employees_id=#employees_id# </isNotNull>
+       		<isNotNull prepend="AND" property="employees_name"> a.employees_name=#employees_name# </isNotNull>
+       		<isNotNull prepend="AND" property="turnover_id"> a.turnover_id=#turnover_id# </isNotNull>
+       		<isNotNull prepend="AND" property="turnover_name"> a.turnover_name=#turnover_name# </isNotNull>
+       		<isNotNull prepend="AND" property="start_time"> <![CDATA[ a.start_time>=#start_time# ]]> </isNotNull>
+       		<isNotNull prepend="AND" property="end_time"> <![CDATA[ a.end_time<=#end_time# ]]> </isNotNull>
+       		<isNotNull prepend="AND" property="state"> a.state=#state# </isNotNull>
+       		<isNotNull prepend="AND" property="contact_name"> a.contact_name=#contact_name# </isNotNull>
+       		<isNotNull prepend="AND" property="contact_phone"> a.contact_phone=#contact_phone# </isNotNull>
+       		<isNotNull prepend="AND" property="charge_name"> a.charge_name=#charge_name# </isNotNull>
+       		<isNotNull prepend="AND" property="charge_phone"> a.charge_phone=#charge_phone# </isNotNull>
+       		<isNotNull prepend="AND" property="remark1"> a.remark1=#remark1# </isNotNull>
+       		<isNotNull prepend="AND" property="remark2"> a.remark2=#remark2# </isNotNull>
+       		<isNotNull prepend="AND" property="remark3"> a.remark3=#remark3# </isNotNull>
+       		<isNotNull prepend="AND" property="create_time"> a.create_time=#create_time# </isNotNull>
+		</dynamic>
+        <isNotNull prepend="" property="sortColumn"> order by $sortColumn$ </isNotNull>
+    </sql>
+
+    <select id="getYyCompanyListCount" resultClass="int">
+         SELECT COUNT(*) FROM yy_company a
+		<include refid="getYyCompanyList_body" />
+    </select>
+
+    <select id="getYyCompanyList" parameterClass="YyCompany" resultClass="YyCompany">
+    	SELECT a.id,a.name,a.code,a.credit_code,a.industry_id,a.industry_name,a.employees_id,a.employees_name,a.turnover_id,a.turnover_name,a.start_time,a.end_time,a.state,a.contact_name,a.contact_phone,a.charge_name,a.charge_phone,a.remark1,a.remark2,a.remark3,a.create_time        FROM yy_company a
+		<include refid="getYyCompanyList_body" />
+        limit #rowStart# , #rowCount# 
+    </select>
+
+    <select id="getYyCompany" parameterClass="YyCompany" resultClass="YyCompany">
+        SELECT a.id,a.name,a.code,a.credit_code,a.industry_id,a.industry_name,a.employees_id,a.employees_name,a.turnover_id,a.turnover_name,a.start_time,a.end_time,a.state,a.contact_name,a.contact_phone,a.charge_name,a.charge_phone,a.remark1,a.remark2,a.remark3,a.create_time        FROM yy_company a
+		<include refid="getYyCompanyList_body" />
+    </select>
+
+    <insert id="insertYyCompany">
+        INSERT INTO yy_company ( 
+        <dynamic prepend="">
+			<isNotNull prepend="" property="name"> name </isNotNull>
+			<isNotNull prepend="," property="code"> code </isNotNull>
+			<isNotNull prepend="," property="credit_code"> credit_code </isNotNull>
+			<isNotNull prepend="," property="industry_id"> industry_id </isNotNull>
+			<isNotNull prepend="," property="industry_name"> industry_name </isNotNull>
+			<isNotNull prepend="," property="employees_id"> employees_id </isNotNull>
+			<isNotNull prepend="," property="employees_name"> employees_name </isNotNull>
+			<isNotNull prepend="," property="turnover_id"> turnover_id </isNotNull>
+			<isNotNull prepend="," property="turnover_name"> turnover_name </isNotNull>
+			<isNotNull prepend="," property="start_time"> start_time </isNotNull>
+			<isNotNull prepend="," property="end_time"> end_time </isNotNull>
+			<isNotNull prepend="," property="state"> state </isNotNull>
+			<isNotNull prepend="," property="contact_name"> contact_name </isNotNull>
+			<isNotNull prepend="," property="contact_phone"> contact_phone </isNotNull>
+			<isNotNull prepend="," property="charge_name"> charge_name </isNotNull>
+			<isNotNull prepend="," property="charge_phone"> charge_phone </isNotNull>
+			<isNotNull prepend="," property="remark1"> remark1 </isNotNull>
+			<isNotNull prepend="," property="remark2"> remark2 </isNotNull>
+			<isNotNull prepend="," property="remark3"> remark3 </isNotNull>
+			<isNotNull prepend="," property="create_time"> create_time </isNotNull>
+        </dynamic>
+        )
+        VALUES (
+        <dynamic prepend="">
+		    <isNotNull prepend="" property="name"> #name# </isNotNull>
+		    <isNotNull prepend="," property="code"> #code# </isNotNull>
+		    <isNotNull prepend="," property="credit_code"> #credit_code# </isNotNull>
+		    <isNotNull prepend="," property="industry_id"> #industry_id# </isNotNull>
+		    <isNotNull prepend="," property="industry_name"> #industry_name# </isNotNull>
+		    <isNotNull prepend="," property="employees_id"> #employees_id# </isNotNull>
+		    <isNotNull prepend="," property="employees_name"> #employees_name# </isNotNull>
+		    <isNotNull prepend="," property="turnover_id"> #turnover_id# </isNotNull>
+		    <isNotNull prepend="," property="turnover_name"> #turnover_name# </isNotNull>
+		    <isNotNull prepend="," property="start_time"> #start_time# </isNotNull>
+		    <isNotNull prepend="," property="end_time"> #end_time# </isNotNull>
+		    <isNotNull prepend="," property="state"> #state# </isNotNull>
+		    <isNotNull prepend="," property="contact_name"> #contact_name# </isNotNull>
+		    <isNotNull prepend="," property="contact_phone"> #contact_phone# </isNotNull>
+		    <isNotNull prepend="," property="charge_name"> #charge_name# </isNotNull>
+		    <isNotNull prepend="," property="charge_phone"> #charge_phone# </isNotNull>
+		    <isNotNull prepend="," property="remark1"> #remark1# </isNotNull>
+		    <isNotNull prepend="," property="remark2"> #remark2# </isNotNull>
+		    <isNotNull prepend="," property="remark3"> #remark3# </isNotNull>
+		    <isNotNull prepend="," property="create_time"> #create_time# </isNotNull>
+        </dynamic>
+        )
+        <selectKey keyProperty="id" resultClass="long">
+			SELECT @@IDENTITY AS id 
+		</selectKey>
+    </insert>
+
+    <update id="updateYyCompany">
+        UPDATE yy_company
+        <dynamic prepend="SET">
+		    <isNotNull prepend="," property="name"> name=#name# </isNotNull>
+		    <isNotNull prepend="," property="code"> code=#code# </isNotNull>
+		    <isNotNull prepend="," property="credit_code"> credit_code=#credit_code# </isNotNull>
+		    <isNotNull prepend="," property="industry_id"> industry_id=#industry_id# </isNotNull>
+		    <isNotNull prepend="," property="industry_name"> industry_name=#industry_name# </isNotNull>
+		    <isNotNull prepend="," property="employees_id"> employees_id=#employees_id# </isNotNull>
+		    <isNotNull prepend="," property="employees_name"> employees_name=#employees_name# </isNotNull>
+		    <isNotNull prepend="," property="turnover_id"> turnover_id=#turnover_id# </isNotNull>
+		    <isNotNull prepend="," property="turnover_name"> turnover_name=#turnover_name# </isNotNull>
+		    <isNotNull prepend="," property="start_time"> start_time=#start_time# </isNotNull>
+		    <isNotNull prepend="," property="end_time"> end_time=#end_time# </isNotNull>
+		    <isNotNull prepend="," property="state"> state=#state# </isNotNull>
+		    <isNotNull prepend="," property="contact_name"> contact_name=#contact_name# </isNotNull>
+		    <isNotNull prepend="," property="contact_phone"> contact_phone=#contact_phone# </isNotNull>
+		    <isNotNull prepend="," property="charge_name"> charge_name=#charge_name# </isNotNull>
+		    <isNotNull prepend="," property="charge_phone"> charge_phone=#charge_phone# </isNotNull>
+		    <isNotNull prepend="," property="remark1"> remark1=#remark1# </isNotNull>
+		    <isNotNull prepend="," property="remark2"> remark2=#remark2# </isNotNull>
+		    <isNotNull prepend="," property="remark3"> remark3=#remark3# </isNotNull>
+		    <isNotNull prepend="," property="create_time"> create_time=#create_time# </isNotNull>
+        </dynamic>
+    	where id = #id#
+    </update>
+    
+    <delete id="removeYyCompany">
+        delete from yy_company where id = #id#
+    </delete>
+    
+    <select id="companyAnalysis" parameterClass="YyCompany" resultClass="YyCompany">
+         select COUNT(*) as companyCount, date_format(create_time, '%Y-%m') as mouthA from yy_company where DATE_FORMAT(create_time, '%Y')=#year_str# group by mouthA;
+    </select>
+    
+</sqlMap>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+ "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+	<!--<sqlMap>元素用于包括SQL Map映射文件和其他的SQL Map配置文件。-->
+	<settings lazyLoadingEnabled="true" useStatementNamespaces="true" />
+		<!-- 系统配置 开始 -->
+		<sqlMap resource="com/sys/manageException/sql/ManageException.xml" /> <!-- 系统异常处理 -->
+		<sqlMap resource="com/sys/manageActScs/sql/ManageActScs.xml" /> <!-- 请求统计 -->
+		<sqlMap resource="com/sys/manageIpScs/sql/ManageIpScs.xml" /> <!-- IP请求统计 -->
+		<!-- 系统配置 结束 -->
+		
+		<sqlMap resource="com/yy/yyIndustry/sql/yyIndustry.xml" /> <!-- 行业表 -->
+		<sqlMap resource="com/yy/yyLearningStyle/sql/yyLearningStyle.xml" /> <!-- 学习风格表 -->
+		<sqlMap resource="com/yy/yyEmployees/sql/yyEmployees.xml" /> <!-- 员工数量范围表 -->
+		<sqlMap resource="com/yy/yyTurnover/sql/yyTurnover.xml" /> <!-- 营业额范围表 -->
+		<sqlMap resource="com/yy/yyCompany/sql/yyCompany.xml" /> <!-- 公司表 -->
+		<sqlMap resource="com/yy/yyCompanyLearnStyle/sql/yyCompanyLearnStyle.xml" /> <!-- 公司学习风格关系表 -->
+		<sqlMap resource="com/yy/yyUser/sql/yyUser.xml" /> <!-- 公司用户表 -->
+		<sqlMap resource="com/yy/yyCourseClassify/sql/yyCourseClassify.xml" /> <!-- 课程体系表 -->
+		<sqlMap resource="com/yy/yyCourse/sql/yyCourse.xml" /> <!-- 课程表 -->
+		<sqlMap resource="com/yy/yyCourseAppendix/sql/yyCourseAppendix.xml" /> <!-- 课程附件表 -->
+		<sqlMap resource="com/yy/yyFunction/sql/yyFunction.xml" /> <!-- 职能表 -->
+		<sqlMap resource="com/yy/yyCourseFunction/sql/yyCourseFunction.xml" /> <!-- 课程职能关系表 -->
+		<sqlMap resource="com/yy/yyUserCourse/sql/yyUserCourse.xml" /> <!-- 用户课程关系表 -->
+		<sqlMap resource="com/yy/yyUserStudy/sql/yyUserStudy.xml" /> <!-- 用户学习记录表 -->
+		<sqlMap resource="com/yy/yyUserFunction/sql/yyUserFunction.xml" /> <!-- 用户职能关系表 -->
+	</sqlMapConfig>

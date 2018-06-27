@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="YyCourseClassify">
+	<typeAlias alias="YyCourseClassify" type="com.yy.yyCourseClassify.model.YyCourseClassify"/>
+	
+    <sql id="getYyCourseClassifyList_body">
+    	<dynamic prepend="WHERE">
+       		<isNotNull prepend="AND" property="id"> a.id=#id# </isNotNull>
+       		<isNotNull prepend="AND" property="name"> a.name=#name# </isNotNull>
+       		<isNotNull prepend="AND" property="level"> a.level=#level# </isNotNull>
+       		<isNotNull prepend="AND" property="parent_id"> a.parent_id=#parent_id# </isNotNull>
+       		<isNotNull prepend="AND" property="img_url"> a.img_url=#img_url# </isNotNull>
+       		<isNotNull prepend="AND" property="sort_id"> a.sort_id=#sort_id# </isNotNull>
+       		<isNotNull prepend="AND" property="info"> a.info=#info# </isNotNull>
+       		<isNotNull prepend="AND" property="keyword"> a.name like concat('%', #keyword#, '%') </isNotNull>
+		</dynamic>
+        <isNotNull prepend="" property="sortColumn"> order by $sortColumn$ </isNotNull>
+    </sql>
+
+    <select id="getYyCourseClassifyListCount" resultClass="int">
+         SELECT COUNT(*) FROM yy_course_classify a
+		<include refid="getYyCourseClassifyList_body" />
+    </select>
+
+    <select id="getYyCourseClassifyList" parameterClass="YyCourseClassify" resultClass="YyCourseClassify">
+    	SELECT a.id,a.name,a.level,a.parent_id,a.img_url,a.info,a.sort_id        FROM yy_course_classify a
+		<include refid="getYyCourseClassifyList_body" />
+        limit #rowStart# , #rowCount# 
+    </select>
+
+    <select id="getYyCourseClassify" parameterClass="YyCourseClassify" resultClass="YyCourseClassify">
+        SELECT a.id,a.name,a.level,a.parent_id,a.img_url,a.info,a.sort_id        FROM yy_course_classify a
+		<include refid="getYyCourseClassifyList_body" />
+    </select>
+
+    <insert id="insertYyCourseClassify">
+        INSERT INTO yy_course_classify ( 
+        <dynamic prepend="">
+			<isNotNull prepend="" property="name"> name </isNotNull>
+			<isNotNull prepend="," property="level"> level </isNotNull>
+			<isNotNull prepend="," property="parent_id"> parent_id </isNotNull>
+			<isNotNull prepend="," property="img_url"> img_url </isNotNull>
+			<isNotNull prepend="," property="info"> info </isNotNull>
+			<isNotNull prepend="," property="sort_id"> sort_id </isNotNull>
+        </dynamic>
+        )
+        VALUES (
+        <dynamic prepend="">
+		    <isNotNull prepend="" property="name"> #name# </isNotNull>
+		    <isNotNull prepend="," property="level"> #level# </isNotNull>
+		    <isNotNull prepend="," property="parent_id"> #parent_id# </isNotNull>
+		    <isNotNull prepend="," property="img_url"> #img_url# </isNotNull>
+		    <isNotNull prepend="," property="info"> #info# </isNotNull>
+		    <isNotNull prepend="," property="sort_id"> #sort_id# </isNotNull>
+        </dynamic>
+        )
+        <selectKey keyProperty="id" resultClass="long">
+			SELECT @@IDENTITY AS id 
+		</selectKey>
+    </insert>
+
+    <update id="updateYyCourseClassify">
+        UPDATE yy_course_classify
+        <dynamic prepend="SET">
+		    <isNotNull prepend="," property="name"> name=#name# </isNotNull>
+		    <isNotNull prepend="," property="level"> level=#level# </isNotNull>
+		    <isNotNull prepend="," property="parent_id"> parent_id=#parent_id# </isNotNull>
+		    <isNotNull prepend="," property="img_url"> img_url=#img_url# </isNotNull>
+		    <isNotNull prepend="," property="info"> info=#info# </isNotNull>
+		    <isNotNull prepend="," property="sort_id"> sort_id=#sort_id# </isNotNull>
+        </dynamic>
+    	where id = #id#
+    </update>
+    
+    <delete id="removeYyCourseClassify">
+        delete from yy_course_classify where id = #id#
+    </delete>
+    
+    <select id="getCourseClassifyParents" parameterClass="YyCourseClassify" resultClass="YyCourseClassify">
+        SELECT a.id,a.name,a.level,a.parent_id,a.img_url,a.info,b.name as module_name,c.id as theme_id,c.name as  theme_name,a.sort_id       
+        FROM yy_course_classify a 
+        left join yy_course_classify b on a.parent_id = b.id
+        left join yy_course_classify c on b.parent_id = c.id
+		<include refid="getYyCourseClassifyList_body" />
+		<isNotNull prepend="" property="fenye"> limit #rowStart# , #rowCount#  </isNotNull>
+    </select>
+    
+    
+    <select id="getCourseClassifyByKeyWord" parameterClass="YyCourseClassify" resultClass="YyCourseClassify">
+        SELECT a.id,a.name,a.level,a.parent_id,a.img_url,a.info,b.name as module_name,c.id as theme_id,c.name as  theme_name,a.sort_id       
+        FROM yy_course_classify a 
+        left join yy_course_classify b on a.parent_id = b.id
+        left join yy_course_classify c on b.parent_id = c.id
+		<dynamic prepend="WHERE">
+       		<isNotNull prepend="AND" property="id"> a.id=#id# </isNotNull>
+       		<isNotNull prepend="AND" property="name"> a.name=#name# </isNotNull>
+       		<isNotNull prepend="AND" property="level"> a.level=#level# </isNotNull>
+       		<isNotNull prepend="AND" property="parent_id"> a.parent_id=#parent_id# </isNotNull>
+       		<isNotNull prepend="AND" property="img_url"> a.img_url=#img_url# </isNotNull>
+       		<isNotNull prepend="AND" property="info"> a.info=#info# </isNotNull>
+       		<isNotNull prepend="AND" property="sort_id"> a.sort_id=#sort_id# </isNotNull>
+       		<isNotNull prepend="AND" property="theme_id"> c.id=#theme_id# </isNotNull>
+       		<isNotNull prepend="AND" property="keyword"> a.name like concat('%', #keyword#, '%') </isNotNull>
+		</dynamic>
+    </select>
+</sqlMap>

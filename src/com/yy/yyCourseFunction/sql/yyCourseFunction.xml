@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="YyCourseFunction">
+	<typeAlias alias="YyCourseFunction" type="com.yy.yyCourseFunction.model.YyCourseFunction"/>
+	
+    <sql id="getYyCourseFunctionList_body">
+    	<dynamic prepend="WHERE">
+       		<isNotNull prepend="AND" property="id"> a.id=#id# </isNotNull>
+       		<isNotNull prepend="AND" property="course_classify_id"> a.course_classify_id=#course_classify_id# </isNotNull>
+       		<isNotNull prepend="AND" property="function_id"> a.function_id=#function_id# </isNotNull>
+		</dynamic>
+        <isNotNull prepend="" property="sortColumn"> order by $sortColumn$ </isNotNull>
+    </sql>
+
+    <select id="getYyCourseFunctionListCount" resultClass="int">
+         SELECT COUNT(*) FROM yy_course_function a
+		<include refid="getYyCourseFunctionList_body" />
+    </select>
+
+    <select id="getYyCourseFunctionList" parameterClass="YyCourseFunction" resultClass="YyCourseFunction">
+    	SELECT a.id,a.course_classify_id,a.function_id        FROM yy_course_function a
+		<include refid="getYyCourseFunctionList_body" />
+        limit #rowStart# , #rowCount# 
+    </select>
+
+    <select id="getYyCourseFunction" parameterClass="YyCourseFunction" resultClass="YyCourseFunction">
+        SELECT a.id,a.course_classify_id,a.function_id        FROM yy_course_function a
+		<include refid="getYyCourseFunctionList_body" />
+    </select>
+
+    <insert id="insertYyCourseFunction">
+        INSERT INTO yy_course_function ( 
+        <dynamic prepend="">
+			<isNotNull prepend="" property="course_classify_id"> course_classify_id </isNotNull>
+			<isNotNull prepend="," property="function_id"> function_id </isNotNull>
+        </dynamic>
+        )
+        VALUES (
+        <dynamic prepend="">
+		    <isNotNull prepend="" property="course_classify_id"> #course_classify_id# </isNotNull>
+		    <isNotNull prepend="," property="function_id"> #function_id# </isNotNull>
+        </dynamic>
+        )
+        <selectKey keyProperty="id" resultClass="long">
+			SELECT @@IDENTITY AS id 
+		</selectKey>
+    </insert>
+
+    <update id="updateYyCourseFunction">
+        UPDATE yy_course_function
+        <dynamic prepend="SET">
+		    <isNotNull prepend="," property="course_classify_id"> course_classify_id=#course_classify_id# </isNotNull>
+		    <isNotNull prepend="," property="function_id"> function_id=#function_id# </isNotNull>
+        </dynamic>
+    	where id = #id#
+    </update>
+    
+    <delete id="removeYyCourseFunction">
+        delete from yy_course_function where id = #id#
+    </delete>
+</sqlMap>

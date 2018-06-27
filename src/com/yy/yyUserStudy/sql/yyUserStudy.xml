@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="YyUserStudy">
+	<typeAlias alias="YyUserStudy" type="com.yy.yyUserStudy.model.YyUserStudy"/>
+	
+    <sql id="getYyUserStudyList_body">
+    	<dynamic prepend="WHERE">
+       		<isNotNull prepend="AND" property="id"> a.id=#id# </isNotNull>
+       		<isNotNull prepend="AND" property="user_id"> a.user_id=#user_id# </isNotNull>
+       		<isNotNull prepend="AND" property="theme_id"> a.theme_id=#theme_id# </isNotNull>
+       		<isNotNull prepend="AND" property="theme_name"> a.theme_name=#theme_name# </isNotNull>
+       		<isNotNull prepend="AND" property="module_id"> a.module_id=#module_id# </isNotNull>
+       		<isNotNull prepend="AND" property="module_name"> a.module_name=#module_name# </isNotNull>
+       		<isNotNull prepend="AND" property="lesson_id"> a.lesson_id=#lesson_id# </isNotNull>
+       		<isNotNull prepend="AND" property="lesson_name"> a.lesson_name=#lesson_name# </isNotNull>
+       		<isNotNull prepend="AND" property="point_id"> a.point_id=#point_id# </isNotNull>
+       		<isNotNull prepend="AND" property="point_name"> a.point_name=#point_name# </isNotNull>
+       		<isNotNull prepend="AND" property="long_time"> a.long_time=#long_time# </isNotNull>
+       		<isNotNull prepend="AND" property="create_time"> a.create_time=#create_time# </isNotNull>
+       		<isNotNull prepend="AND" property="start_time"> a.start_time=#start_time# </isNotNull>
+       		<isNotNull prepend="AND" property="end_time"> a.end_time=#end_time# </isNotNull>
+       		<isNotNull prepend="AND" property="is_over"> a.is_over=#is_over# </isNotNull>
+		</dynamic>
+        <isNotNull prepend="" property="sortColumn"> order by $sortColumn$ </isNotNull>
+    </sql>
+
+    <select id="getYyUserStudyListCount" resultClass="int">
+         SELECT COUNT(*) FROM yy_user_study a
+		<include refid="getYyUserStudyList_body" />
+    </select>
+
+    <select id="getYyUserStudyList" parameterClass="YyUserStudy" resultClass="YyUserStudy">
+    	SELECT a.id,a.user_id,a.theme_id,a.theme_name,a.module_id,a.module_name,a.lesson_id,a.lesson_name,a.point_id,a.point_name,a.long_time,a.create_time,a.start_time,a.end_time,a.is_over        FROM yy_user_study a
+		<include refid="getYyUserStudyList_body" />
+        limit #rowStart# , #rowCount# 
+    </select>
+
+    <select id="getYyUserStudy" parameterClass="YyUserStudy" resultClass="YyUserStudy">
+        SELECT a.id,a.user_id,a.theme_id,a.theme_name,a.module_id,a.module_name,a.lesson_id,a.lesson_name,a.point_id,a.point_name,a.long_time,a.create_time,a.start_time,a.end_time,a.is_over        FROM yy_user_study a
+		<include refid="getYyUserStudyList_body" />
+    </select>
+
+    <insert id="insertYyUserStudy">
+        INSERT INTO yy_user_study ( 
+        <dynamic prepend="">
+			<isNotNull prepend="" property="user_id"> user_id </isNotNull>
+			<isNotNull prepend="," property="theme_id"> theme_id </isNotNull>
+			<isNotNull prepend="," property="theme_name"> theme_name </isNotNull>
+			<isNotNull prepend="," property="module_id"> module_id </isNotNull>
+			<isNotNull prepend="," property="module_name"> module_name </isNotNull>
+			<isNotNull prepend="," property="lesson_id"> lesson_id </isNotNull>
+			<isNotNull prepend="," property="lesson_name"> lesson_name </isNotNull>
+			<isNotNull prepend="," property="point_id"> point_id </isNotNull>
+			<isNotNull prepend="," property="point_name"> point_name </isNotNull>
+			<isNotNull prepend="," property="long_time"> long_time </isNotNull>
+			<isNotNull prepend="," property="create_time"> create_time </isNotNull>
+			<isNotNull prepend="," property="start_time"> start_time </isNotNull>
+			<isNotNull prepend="," property="end_time"> end_time </isNotNull>
+			<isNotNull prepend="," property="is_over"> is_over </isNotNull>
+        </dynamic>
+        )
+        VALUES (
+        <dynamic prepend="">
+		    <isNotNull prepend="" property="user_id"> #user_id# </isNotNull>
+		    <isNotNull prepend="," property="theme_id"> #theme_id# </isNotNull>
+		    <isNotNull prepend="," property="theme_name"> #theme_name# </isNotNull>
+		    <isNotNull prepend="," property="module_id"> #module_id# </isNotNull>
+		    <isNotNull prepend="," property="module_name"> #module_name# </isNotNull>
+		    <isNotNull prepend="," property="lesson_id"> #lesson_id# </isNotNull>
+		    <isNotNull prepend="," property="lesson_name"> #lesson_name# </isNotNull>
+		    <isNotNull prepend="," property="point_id"> #point_id# </isNotNull>
+		    <isNotNull prepend="," property="point_name"> #point_name# </isNotNull>
+		    <isNotNull prepend="," property="long_time"> #long_time# </isNotNull>
+		    <isNotNull prepend="," property="create_time"> #create_time# </isNotNull>
+		    <isNotNull prepend="," property="start_time"> #start_time# </isNotNull>
+		    <isNotNull prepend="," property="end_time"> #end_time# </isNotNull>
+		    <isNotNull prepend="," property="is_over"> #is_over# </isNotNull>
+        </dynamic>
+        )
+        <selectKey keyProperty="id" resultClass="long">
+			SELECT @@IDENTITY AS id 
+		</selectKey>
+    </insert>
+
+    <update id="updateYyUserStudy">
+        UPDATE yy_user_study
+        <dynamic prepend="SET">
+		    <isNotNull prepend="," property="user_id"> user_id=#user_id# </isNotNull>
+		    <isNotNull prepend="," property="theme_id"> theme_id=#theme_id# </isNotNull>
+		    <isNotNull prepend="," property="theme_name"> theme_name=#theme_name# </isNotNull>
+		    <isNotNull prepend="," property="module_id"> module_id=#module_id# </isNotNull>
+		    <isNotNull prepend="," property="module_name"> module_name=#module_name# </isNotNull>
+		    <isNotNull prepend="," property="lesson_id"> lesson_id=#lesson_id# </isNotNull>
+		    <isNotNull prepend="," property="lesson_name"> lesson_name=#lesson_name# </isNotNull>
+		    <isNotNull prepend="," property="point_id"> point_id=#point_id# </isNotNull>
+		    <isNotNull prepend="," property="point_name"> point_name=#point_name# </isNotNull>
+		    <isNotNull prepend="," property="long_time"> long_time=#long_time# </isNotNull>
+		    <isNotNull prepend="," property="create_time"> create_time=#create_time# </isNotNull>
+		    <isNotNull prepend="," property="start_time"> start_time=#start_time# </isNotNull>
+		    <isNotNull prepend="," property="end_time"> end_time=#end_time# </isNotNull>
+		    <isNotNull prepend="," property="is_over"> is_over=#is_over# </isNotNull>
+        </dynamic>
+    	where id = #id#
+    </update>
+    
+    <delete id="removeYyUserStudy">
+        delete from yy_user_study where id = #id#
+    </delete>
+    
+    <select id="getUserStudyTime" resultClass="int">
+    	SELECT IF(SUM(a.long_time) is null,0,SUM(a.long_time)) FROM yy_user_study a
+    	<include refid="getYyUserStudyList_body" />
+    </select>
+    
+    <select id="getYyUserStudyByLesson" parameterClass="YyUserStudy" resultClass="YyUserStudy">
+        SELECT a.id,a.user_id,a.theme_id,a.theme_name,a.module_id,a.module_name,a.lesson_id,a.lesson_name,a.point_id,a.point_name,a.long_time,a.create_time,a.start_time,a.end_time,a.is_over,b.img_url        
+        FROM yy_user_study a
+        left join yy_course_classify b on a.lesson_id = b.id
+		<include refid="getYyUserStudyList_body" />
+		group by a.lesson_id
+    </select>
+    
+    <select id="getYyUserStudyByLessonPage" parameterClass="YyUserStudy" resultClass="YyUserStudy">
+        SELECT a.id,a.user_id,a.theme_id,a.theme_name,a.module_id,a.module_name,a.lesson_id,a.lesson_name,a.point_id,a.point_name,a.long_time,a.create_time,a.start_time,a.end_time,a.is_over,b.img_url        
+        FROM yy_user_study a
+        left join yy_course_classify b on a.lesson_id = b.id
+		<include refid="getYyUserStudyList_body" />
+		group by a.lesson_id
+		limit #rowStart# , #rowCount# 
+    </select>
+    
+    <select id="getYyUserStudyByLessonCount" parameterClass="YyUserStudy" resultClass="YyUserStudy">
+        SELECT count(*)        
+        FROM yy_user_study a
+        left join yy_course_classify b on a.lesson_id = b.id
+		<include refid="getYyUserStudyList_body" />
+		group by a.lesson_id
+    </select>
+    
+</sqlMap>

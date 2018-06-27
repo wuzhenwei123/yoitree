@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="ManageActScs">
+	<typeAlias alias="ManageActScs" type="com.sys.manageActScs.model.ManageActScs"/>
+	
+    <sql id="getManageActScsList_body">
+    	<dynamic prepend="WHERE">
+       		<isNotNull prepend="AND" property="id"> a.id=#id# </isNotNull>
+       		<isNotNull prepend="AND" property="requestPath"> a.requestPath=#requestPath# </isNotNull>
+       		<isNotNull prepend="AND" property="requestCount"> a.requestCount=#requestCount# </isNotNull>
+       		<isNotNull prepend="AND" property="requestDateTime"> a.requestDateTime=#requestDateTime# </isNotNull>
+       		<isNotNull prepend="AND" property="aliasName"> a.aliasName=#aliasName# </isNotNull>
+       		<isNotNull prepend="AND" property="createTime1"> a.requestDateTime >= #createTime1# </isNotNull>
+       		<isNotNull prepend="AND" property="createTime2"> a.requestDateTime <![CDATA[<=]]> #createTime2# </isNotNull>
+		</dynamic>
+        <isNotNull prepend="" property="sortColumn"> order by $sortColumn$ </isNotNull>
+    </sql>
+
+    <select id="getManageActScsListCount" resultClass="int">
+         SELECT COUNT(*) FROM manage_act_scs a
+		<include refid="getManageActScsList_body" />
+    </select>
+
+    <select id="getManageActScsList" parameterClass="ManageActScs" resultClass="ManageActScs">
+    	SELECT a.id,a.requestPath,a.requestCount,a.requestDateTime        FROM manage_act_scs a
+		<include refid="getManageActScsList_body" />
+        limit #rowStart# , #rowCount# 
+    </select>
+
+    <select id="getManageActScs" parameterClass="ManageActScs" resultClass="ManageActScs">
+        SELECT a.id,a.requestPath,a.requestCount,a.requestDateTime        FROM manage_act_scs a
+		<include refid="getManageActScsList_body" />
+    </select>
+
+    <insert id="insertManageActScs">
+        INSERT INTO manage_act_scs ( 
+        <dynamic prepend="">
+			<isNotNull prepend="" property="requestPath"> requestPath </isNotNull>
+			<isNotNull prepend="," property="requestCount"> requestCount </isNotNull>
+			<isNotNull prepend="," property="requestDateTime"> requestDateTime </isNotNull>
+			<isNotNull prepend="," property="aliasName"> aliasName </isNotNull>
+        </dynamic>
+        )
+        VALUES (
+        <dynamic prepend="">
+		    <isNotNull prepend="" property="requestPath"> #requestPath# </isNotNull>
+		    <isNotNull prepend="," property="requestCount"> #requestCount# </isNotNull>
+		    <isNotNull prepend="," property="requestDateTime"> #requestDateTime# </isNotNull>
+		    <isNotNull prepend="," property="aliasName"> #aliasName# </isNotNull>
+        </dynamic>
+        )
+        <selectKey keyProperty="id" resultClass="int">
+			SELECT @@IDENTITY AS id 
+		</selectKey>
+    </insert>
+
+    <update id="updateManageActScs">
+        UPDATE manage_act_scs
+        <dynamic prepend="SET">
+		    <isNotNull prepend="," property="requestPath"> requestPath=#requestPath# </isNotNull>
+		    <isNotNull prepend="," property="requestCount"> requestCount=#requestCount# </isNotNull>
+		    <isNotNull prepend="," property="requestDateTime"> requestDateTime=#requestDateTime# </isNotNull>
+		    <isNotNull prepend="," property="aliasName"> aliasName=#aliasName# </isNotNull>
+        </dynamic>
+    	where id = #id#
+    </update>
+    
+    <delete id="removeManageActScs">
+        delete from manage_act_scs where id = #id#
+    </delete>
+</sqlMap>

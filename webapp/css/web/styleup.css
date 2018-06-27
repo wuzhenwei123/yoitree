@@ -1,0 +1,235 @@
+/*团队管理*/
+.s_xkp2{color: #a4a4a4;}
+.s_xkpsct{color: #4a4a4a;}
+/*个人中心*/
+.s_123 span{
+	float: left;
+	width: 24px;
+	height: 24px;
+	line-height: 24px;
+	font-size: 14px;
+	color: #a4a4a4;
+    text-align: center;
+    margin-top: 70px;
+}
+.s_123 span:nth-child(1) img{
+	display: inline-block;
+    transform: rotate(180deg);
+    width: 16px;
+    height: 16px;
+}
+.s_123 span:last-child img{
+	display: inline-block;
+	width: 16px;
+    height: 16px;
+}
+.s_123 li{
+	margin-left: 5px;
+}
+.s_123 li:hover{
+    border-radius: 3px;
+	background: #2c7ec2;
+	color: #fff;
+}
+/*学习中心*/
+.s_box2 .s_dmo h6{
+	padding: 20px 0;
+}
+/*学习详情*/
+.sbtn_group button{
+    outline:none;
+}
+.ss_jindu em{
+    background: #2c7ec2;
+    display: inline-block;
+    height: 8px;
+    border-radius: 8px;
+    float: left;
+}
+.ss_jindu{
+    display: inline-block;
+    width: 40%;
+    background: #e7e7e7;
+    height: 8px;
+    border-radius: 8px;
+    margin: 0 10px;
+}
+
+.s_ipt{
+    display: inline-block;
+    width: 150px;
+    padding: 8px 10px;
+    box-sizing: border-box;
+    /*border-radius: 3px;
+    background-color: #ffffff;
+    border: solid 1px #d8d8d8;*/
+}
+.s_ipt:hover{
+	border-radius: 3px;
+    background-color: #ffffff;
+    border: solid 1px #d8d8d8;
+    color: #a4a4a4;
+}
+/*h5日历*/
+::-webkit-clear-button {-webkit-appearance: none; }
+::-webkit-inner-spin-button { visibility: hidden; }
+::-webkit-calendar-picker-indicator {
+    background:url(../../images/web/sdata.PNG) no-repeat left center;
+    background-size: 16px 16px;
+    color: #fff;
+    padding-left: 16px;
+}
+/*学习详情2*/
+.sxq_ul2 li{
+	position: relative;
+}
+.s_altshow{
+	display: block !important;
+}
+.s_alt{
+	/*display: none;*/
+    position: absolute;
+    /*display: inline-block;*/
+    right: -15px;
+    top: 25px;
+    z-index: 1;
+	width: 152px;
+    box-sizing: border-box;
+    padding: 10px;
+    text-align: center;
+	background-color: #ffffff;
+	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
+}
+.s_alt b{  
+    position: absolute;
+    top: 0;
+    right: 25px; 
+    display: inline-block;
+}  
+.s_alt b:before,  
+.s_alt b:after{  
+position:absolute;  
+content:'';  
+width:14px;  
+height:14px;  
+bottom:-8px;  
+left:50%;  
+margin-left:-7px;  
+overflow:hidden;  
+pointer-events:none;  
+-webkit-transform:rotate(45deg);  
+-mz-transform:rotate(45deg);  
+transform:rotate(45deg);  
+}  
+.s_alt b:before{  
+background:#fff;  
+box-shadow:-1px -1px 1px rgba(0,0,0,0.15);   
+}  
+.s_alt b:after{  
+bottom:-9px;background:#fff;  
+}  
+
+.s_xqalert .sxq_ul2 li{
+	line-height: normal;
+    padding-top: 22px;
+    box-sizing: border-box;
+}
+.sxq_ul2 li .s_alt i{
+	font-style: normal;
+	display: inline-block;
+	font-size: 16px;
+	color: #2c7ec2;
+    margin-bottom: 10px;
+}
+/*学习中心*/
+/*轮播图*/
+.swiper-container-horizontal>.swiper-pagination{
+	margin-top: 0;
+	position: absolute;
+	bottom: 70px !important;
+}
+.swiper-container-horizontal>.swiper-pagination .swiper-pagination-bullet{
+	width: 7px;
+    height: 7px;
+    background: none;
+    border: 1px solid #fff;
+    margin: 0 7px!important;
+}
+.swiper-container-horizontal>.swiper-pagination .swiper-pagination-bullet-active{
+	background: #fff;
+}
+.s_box2 .s_wap .s_p2{
+	z-index: 9;
+}
+
+/*课程体系*/
+.s_kcbox nav .su1 li img{
+	width: 36px;
+	height: 36px;
+}
+.s_kcbox nav .su1 li span{
+	border: 0 !important;
+}
+.s_kcbox nav .su1 li .sctv{
+	background: none !important;
+}
+
+
+/*课程详情*/
+.s_kctxt2 .s_mludl{
+    margin-left: -24px;
+    padding-left: 24px;
+    box-sizing: border-box;
+}
+.s_kctxt2 .s_lefbor{
+	border-left: 2px solid #2c7ec2;  
+    padding-left: 22px !important;
+}
+.s_kctxt2 .s_lefbor .p3{
+	color: #2c7ec2 !important;
+}
+.kc_mulu .s_mludl{
+    margin: 0px !important;
+    padding: 8px 0;
+    padding-left: 22px;
+    box-sizing: border-box;
+}
+.kc_mulu .s_mludl .s_typeof{
+    float: left;
+    margin-left: -25px;
+    margin-top: 18px;
+    width: 2px;
+    height: 35px;
+    position: relative;
+}
+.kc_mulu .s_mludl .s_typeof img{
+	width: 16px;
+	height: 16px;
+    position: absolute;
+    z-index: 9;
+}
+
+.kc_mulu .s_mludl .s_typeof i{
+    display: inline-block;
+    width: 2px;
+    height: 72px;
+    background: #d8d8d8;
+    position: absolute;
+    top: -26px;
+    z-index: 9;
+    left: 7px;
+}
+.kc_mulu .s_mludl .s_typeof .i1{
+	height: 46px !important;
+	top: 0 !important;
+}
+.kc_mulu .s_mludl .s_typeof .i2{
+	height: 46px !important;
+	top: -30px !important;
+}
+.kc_mulu .s_mludl:hover .p4{
+	color: #2c7ec2;
+}
+.kc_mulu .s_mludl .s_tpact i{
+    background: #2c7ec2;
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="YyFunction">
+	<typeAlias alias="YyFunction" type="com.yy.yyFunction.model.YyFunction"/>
+	
+    <sql id="getYyFunctionList_body">
+    	<dynamic prepend="WHERE">
+       		<isNotNull prepend="AND" property="id"> a.id=#id# </isNotNull>
+       		<isNotNull prepend="AND" property="name"> a.name=#name# </isNotNull>
+       		<isNotNull prepend="AND" property="parent_id"> a.parent_id=#parent_id# </isNotNull>
+		</dynamic>
+        <isNotNull prepend="" property="sortColumn"> order by $sortColumn$ </isNotNull>
+    </sql>
+
+    <select id="getYyFunctionListCount" resultClass="int">
+         SELECT COUNT(*) FROM yy_function a
+		<include refid="getYyFunctionList_body" />
+    </select>
+
+    <select id="getYyFunctionList" parameterClass="YyFunction" resultClass="YyFunction">
+    	SELECT a.id,a.name,a.parent_id        FROM yy_function a
+		<include refid="getYyFunctionList_body" />
+        limit #rowStart# , #rowCount# 
+    </select>
+
+    <select id="getYyFunction" parameterClass="YyFunction" resultClass="YyFunction">
+        SELECT a.id,a.name,a.parent_id        FROM yy_function a
+		<include refid="getYyFunctionList_body" />
+    </select>
+
+    <insert id="insertYyFunction">
+        INSERT INTO yy_function ( 
+        <dynamic prepend="">
+			<isNotNull prepend="" property="name"> name </isNotNull>
+			<isNotNull prepend="," property="parent_id"> parent_id </isNotNull>
+        </dynamic>
+        )
+        VALUES (
+        <dynamic prepend="">
+		    <isNotNull prepend="" property="name"> #name# </isNotNull>
+		    <isNotNull prepend="," property="parent_id"> #parent_id# </isNotNull>
+        </dynamic>
+        )
+        <selectKey keyProperty="id" resultClass="int">
+			SELECT @@IDENTITY AS id 
+		</selectKey>
+    </insert>
+
+    <update id="updateYyFunction">
+        UPDATE yy_function
+        <dynamic prepend="SET">
+		    <isNotNull prepend="," property="name"> name=#name# </isNotNull>
+		    <isNotNull prepend="," property="parent_id"> parent_id=#parent_id# </isNotNull>
+        </dynamic>
+    	where id = #id#
+    </update>
+    
+    <delete id="removeYyFunction">
+        delete from yy_function where id = #id#
+    </delete>
+</sqlMap>

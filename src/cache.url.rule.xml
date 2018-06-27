@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cache-list>
+	<!-- 
+		URL缓存策略，url 请求URL,expires缓存时间(s)，on-off是否开启缓存(on|off) 
+		<cache>
+			<url><![CDATA[/manageActScs/index]]></url>
+			<expires><![CDATA[60]]></expires>
+			<on-off><![CDATA[on]]></on-off>
+		</cache>
+	-->
+</cache-list>

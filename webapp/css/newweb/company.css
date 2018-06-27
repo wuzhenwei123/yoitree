@@ -1,0 +1,118 @@
+.title{
+	font-size: 20px;
+  	font-weight: 500;
+  	color: #4a4a4a;
+}
+.com_list{
+	padding-top: 16px;
+}
+.com_list li{
+	margin-top: 16px;
+}
+.com_list li label{
+	display: inline-block;
+	width: 24%;
+	font-size: 14px;
+  	color: #9b9b9b;
+}
+.com_list li span{
+	font-size: 14px;
+}
+.btn_edit{
+	float: right;
+	width: 16px;
+	height: 16px;
+	background: url("../../images/newweb/edit.png") center no-repeat;
+	background-size: contain;
+}
+/*edit*/
+.edit_box{
+    width:542px;
+    margin: 133px auto;
+    position: relative;
+}
+.btn_close{
+    position: absolute;
+    top:0;
+    right:-134px;
+    width:16px;
+    height:16px;
+    background: url("../../images/newweb/close.png") center no-repeat;
+    -webkit-background-size: contain;
+    background-size: contain;
+}
+.edit_box h3{
+    font-size: 20px;
+    text-align: center;
+    padding: 60px 0 80px;
+    font-weight: normal;
+}
+.edit_box label{
+    display: inline-block;
+    width:103px;
+    font-size: 14px;
+    color: #a4a4a4;
+}
+.edit_box input{
+    width: 387px;
+    height: 40px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    border: solid 1px #d8d8d8;
+    margin-bottom: 16px;
+    padding: 0 40px 0 5px;
+    font-size: 14px;
+    letter-spacing:1px;
+    color: #515358;
+}
+.check_box{
+    height:44px;
+    display: inline-block;
+    vertical-align: middle;
+    padding-top:14px;
+    width:434px;
+}
+.check_box span{
+    float: left;
+    font-size:14px;
+    color: #a4a4a4;
+    margin-right:30px;
+    cursor: pointer;
+    height:30px;
+    line-height:30px;
+}
+.check_box .active s{
+    border-color: #2c7ec2;
+    background: url("../../images/newweb/dian.png") center no-repeat;
+}
+.check_box span s{
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    border: solid 1px #d8d8d8;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin:0 16px 0 8px;
+}
+.btn_box{
+    float: right;
+    margin:100px 0 50px;
+}
+.btn_box a{
+    display: inline-block;
+    width:152px;
+    height: 38px;
+    line-height:38px;
+    border-radius: 3px;
+    font-size: 14px;
+    text-align: center;
+}
+.btn_cancel{
+    border: solid 1px #a4a4a4;
+    color: #a4a4a4;
+    margin-right:16px;
+}
+.btn_ok{
+    background-color: #2c7ec2;
+    color: #ffffff;
+}

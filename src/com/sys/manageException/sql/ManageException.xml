@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="ManageException">
+	<typeAlias alias="ManageException" type="com.sys.manageException.model.ManageException"/>
+	
+    <sql id="getManageExceptionList_body">
+    	<dynamic prepend="WHERE">
+       		<isNotNull prepend="AND" property="id"> a.id=#id# </isNotNull>
+       		<isNotNull prepend="AND" property="exception"> a.exception=#exception# </isNotNull>
+       		<isNotNull prepend="AND" property="content"> a.content=#content# </isNotNull>
+       		<isNotNull prepend="AND" property="createTime1"> a.createTime >= #createTime1# </isNotNull>
+       		<isNotNull prepend="AND" property="createTime2"> a.createTime <![CDATA[<=]]> #createTime2# </isNotNull>
+       		<isNotNull prepend="AND" property="remark"> a.remark=#remark# </isNotNull>
+       		<isNotNull prepend="AND" property="state"> a.state=#state# </isNotNull>
+       		<isNotNull prepend="AND" property="brief"> a.brief=#brief# </isNotNull>
+		</dynamic>
+        <isNotNull prepend="" property="sortColumn"> order by $sortColumn$ </isNotNull>
+    </sql>
+
+    <select id="getManageExceptionListCount" resultClass="int">
+         SELECT COUNT(*) FROM manage_exception a
+		<include refid="getManageExceptionList_body" />
+    </select>
+
+    <select id="getManageExceptionList" parameterClass="ManageException" resultClass="ManageException">
+    	SELECT a.id,a.exception,a.content,a.createTime,a.remark,a.state,a.brief        FROM manage_exception a
+		<include refid="getManageExceptionList_body" />
+        limit #rowStart# , #rowCount# 
+    </select>
+
+    <select id="getManageException" parameterClass="ManageException" resultClass="ManageException">
+        SELECT a.id,a.exception,a.content,a.createTime,a.remark,a.state,a.brief        FROM manage_exception a
+		<include refid="getManageExceptionList_body" />
+    </select>
+
+    <insert id="insertManageException">
+        INSERT INTO manage_exception ( 
+        <dynamic prepend="">
+			<isNotNull prepend="" property="exception"> exception </isNotNull>
+			<isNotNull prepend="," property="content"> content </isNotNull>
+			<isNotNull prepend="," property="createTime"> createTime </isNotNull>
+			<isNotNull prepend="," property="remark"> remark </isNotNull>
+			<isNotNull prepend="," property="state"> state </isNotNull>
+			<isNotNull prepend="," property="brief"> brief </isNotNull>
+        </dynamic>
+        )
+        VALUES (
+        <dynamic prepend="">
+		    <isNotNull prepend="" property="exception"> #exception# </isNotNull>
+		    <isNotNull prepend="," property="content"> #content# </isNotNull>
+		    <isNotNull prepend="," property="createTime"> #createTime# </isNotNull>
+		    <isNotNull prepend="," property="remark"> #remark# </isNotNull>
+		    <isNotNull prepend="," property="state"> #state# </isNotNull>
+		    <isNotNull prepend="," property="brief"> #brief# </isNotNull>
+        </dynamic>
+        )
+        <selectKey keyProperty="id" resultClass="int">
+			SELECT @@IDENTITY AS id 
+		</selectKey>
+    </insert>
+
+    <update id="updateManageException">
+        UPDATE manage_exception
+        <dynamic prepend="SET">
+		    <isNotNull prepend="," property="exception"> exception=#exception# </isNotNull>
+		    <isNotNull prepend="," property="content"> content=#content# </isNotNull>
+		    <isNotNull prepend="," property="createTime"> createTime=#createTime# </isNotNull>
+		    <isNotNull prepend="," property="remark"> remark=#remark# </isNotNull>
+		    <isNotNull prepend="," property="state"> state=#state# </isNotNull>
+		    <isNotNull prepend="," property="brief"> brief=#brief# </isNotNull>
+        </dynamic>
+    	where id = #id#
+    </update>
+    
+    <delete id="removeManageException">
+        delete from manage_exception where id = #id#
+    </delete>
+</sqlMap>

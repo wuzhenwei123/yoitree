@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="YyCourseAppendix">
+	<typeAlias alias="YyCourseAppendix" type="com.yy.yyCourseAppendix.model.YyCourseAppendix"/>
+	
+    <sql id="getYyCourseAppendixList_body">
+    	<dynamic prepend="WHERE">
+       		<isNotNull prepend="AND" property="id"> a.id=#id# </isNotNull>
+       		<isNotNull prepend="AND" property="course_id"> a.course_id=#course_id# </isNotNull>
+       		<isNotNull prepend="AND" property="url"> a.url=#url# </isNotNull>
+       		<isNotNull prepend="AND" property="name"> a.name=#name# </isNotNull>
+       		<isNotNull prepend="AND" property="state"> a.state=#state# </isNotNull>
+       		<isNotNull prepend="AND" property="course_name"> b.name=#course_name# </isNotNull>
+       		<isNotNull prepend="AND" property="classify_id"> b.classify_id=#classify_id# </isNotNull>
+		</dynamic>
+        <isNotNull prepend="" property="sortColumn"> order by $sortColumn$ </isNotNull>
+    </sql>
+
+    <select id="getYyCourseAppendixListCount" resultClass="int">
+         SELECT COUNT(*) FROM yy_course_appendix a
+         left join yy_course b on a.course_id = b.id
+		<include refid="getYyCourseAppendixList_body" />
+    </select>
+
+    <select id="getYyCourseAppendixList" parameterClass="YyCourseAppendix" resultClass="YyCourseAppendix">
+    	SELECT a.id,a.course_id,a.url,a.name,a.state,b.name as course_name        FROM yy_course_appendix a
+    	left join yy_course b on a.course_id = b.id
+		<include refid="getYyCourseAppendixList_body" />
+        limit #rowStart# , #rowCount# 
+    </select>
+
+    <select id="getYyCourseAppendix" parameterClass="YyCourseAppendix" resultClass="YyCourseAppendix">
+        SELECT a.id,a.course_id,a.url,a.name,a.state,b.name as course_name        FROM yy_course_appendix a
+		left join yy_course b on a.course_id = b.id
+		<include refid="getYyCourseAppendixList_body" />
+    </select>
+
+    <insert id="insertYyCourseAppendix">
+        INSERT INTO yy_course_appendix ( 
+        <dynamic prepend="">
+			<isNotNull prepend="" property="course_id"> course_id </isNotNull>
+			<isNotNull prepend="," property="url"> url </isNotNull>
+			<isNotNull prepend="," property="name"> name </isNotNull>
+			<isNotNull prepend="," property="name"> state </isNotNull>
+        </dynamic>
+        )
+        VALUES (
+        <dynamic prepend="">
+		    <isNotNull prepend="" property="course_id"> #course_id# </isNotNull>
+		    <isNotNull prepend="," property="url"> #url# </isNotNull>
+		    <isNotNull prepend="," property="name"> #name# </isNotNull>
+		    <isNotNull prepend="," property="name"> #state# </isNotNull>
+        </dynamic>
+        )
+        <selectKey keyProperty="id" resultClass="long">
+			SELECT @@IDENTITY AS id 
+		</selectKey>
+    </insert>
+    
+    <insert id="insertYyCourseAppendix1">
+        INSERT INTO yy_course_appendix ( 
+        <dynamic prepend="">
+			<isNotNull prepend="" property="url"> url </isNotNull>
+			<isNotNull prepend="," property="name"> name </isNotNull>
+			<isNotNull prepend="," property="name"> state </isNotNull>
+        </dynamic>
+        )
+        VALUES (
+        <dynamic prepend="">
+		    <isNotNull prepend="" property="url"> #url# </isNotNull>
+		    <isNotNull prepend="," property="name"> #name# </isNotNull>
+		    <isNotNull prepend="," property="name"> #state# </isNotNull>
+        </dynamic>
+        )
+        <selectKey keyProperty="id" resultClass="long">
+			SELECT @@IDENTITY AS id 
+		</selectKey>
+    </insert>
+
+    <update id="updateYyCourseAppendix">
+        UPDATE yy_course_appendix
+        <dynamic prepend="SET">
+		    <isNotNull prepend="," property="course_id"> course_id=#course_id# </isNotNull>
+		    <isNotNull prepend="," property="url"> url=#url# </isNotNull>
+		    <isNotNull prepend="," property="name"> name=#name# </isNotNull>
+		    <isNotNull prepend="," property="state"> state=#state# </isNotNull>
+        </dynamic>
+    	where id = #id#
+    </update>
+    
+    <delete id="removeYyCourseAppendix">
+        delete from yy_course_appendix where id = #id#
+    </delete>
+</sqlMap>

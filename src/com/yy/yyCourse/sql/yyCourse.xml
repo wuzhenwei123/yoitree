@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="YyCourse">
+	<typeAlias alias="YyCourse" type="com.yy.yyCourse.model.YyCourse"/>
+	
+    <sql id="getYyCourseList_body">
+    	<dynamic prepend="WHERE">
+       		<isNotNull prepend="AND" property="id"> a.id=#id# </isNotNull>
+       		<isNotNull prepend="AND" property="name"> a.name=#name# </isNotNull>
+       		<isNotNull prepend="AND" property="code"> a.code=#code# </isNotNull>
+       		<isNotNull prepend="AND" property="classify_id"> a.classify_id=#classify_id# </isNotNull>
+       		<isNotNull prepend="AND" property="img_url"> a.img_url=#img_url# </isNotNull>
+       		<isNotNull prepend="AND" property="video_url"> a.video_url=#video_url# </isNotNull>
+       		<isNotNull prepend="AND" property="mp3_url"> a.mp3_url=#mp3_url# </isNotNull>
+       		<isNotNull prepend="AND" property="info"> a.info=#info# </isNotNull>
+       		<isNotNull prepend="AND" property="when_long"> a.when_long=#when_long# </isNotNull>
+       		<isNotNull prepend="AND" property="sort_id"> a.sort_id=#sort_id# </isNotNull>
+       		<isNotNull prepend="AND" property="video_fileId"> a.video_fileId=#video_fileId# </isNotNull>
+       		<isNotNull prepend="AND" property="audio_fileId"> a.audio_fileId=#audio_fileId# </isNotNull>
+       		<isNotNull prepend="AND" property="video_state"> a.video_state=#video_state# </isNotNull>
+       		<isNotNull prepend="AND" property="audio_state"> a.audio_state=#audio_state# </isNotNull>
+       		<isNotNull prepend="AND" property="video_play"> a.video_play=#video_play# </isNotNull>
+       		<isNotNull prepend="AND" property="audio_play"> a.audio_play=#audio_play# </isNotNull>
+       		<isNotNull prepend="AND" property="otherId"> a.id <![CDATA[ <> ]]> #otherId# </isNotNull>
+		</dynamic>
+        <isNotNull prepend="" property="sortColumn"> order by $sortColumn$ </isNotNull>
+    </sql>
+
+    <select id="getYyCourseListCount" resultClass="int">
+         SELECT COUNT(*) FROM yy_course a
+		<include refid="getYyCourseList_body" />
+    </select>
+
+    <select id="getYyCourseList" parameterClass="YyCourse" resultClass="YyCourse">
+    	SELECT a.id,a.name,a.code,a.classify_id,a.img_url,a.video_url,a.mp3_url,a.info,a.when_long,a.sort_id,a.video_fileId,a.audio_fileId,a.video_state,a.audio_state,a.video_play,a.audio_play        FROM yy_course a
+		<include refid="getYyCourseList_body" />
+        limit #rowStart# , #rowCount# 
+    </select>
+
+    <select id="getYyCourse" parameterClass="YyCourse" resultClass="YyCourse">
+        SELECT a.id,a.name,a.code,a.classify_id,a.img_url,a.video_url,a.mp3_url,a.info,a.when_long,a.sort_id,a.video_fileId,a.audio_fileId,a.video_state,a.audio_state,a.video_play,a.audio_play        FROM yy_course a
+		<include refid="getYyCourseList_body" />
+    </select>
+
+    <insert id="insertYyCourse">
+        INSERT INTO yy_course ( 
+        <dynamic prepend="">
+			<isNotNull prepend="" property="name"> name </isNotNull>
+			<isNotNull prepend="," property="code"> code </isNotNull>
+			<isNotNull prepend="," property="classify_id"> classify_id </isNotNull>
+			<isNotNull prepend="," property="img_url"> img_url </isNotNull>
+			<isNotNull prepend="," property="video_url"> video_url </isNotNull>
+			<isNotNull prepend="," property="mp3_url"> mp3_url </isNotNull>
+			<isNotNull prepend="," property="info"> info </isNotNull>
+			<isNotNull prepend="," property="when_long"> when_long </isNotNull>
+			<isNotNull prepend="," property="sort_id"> sort_id </isNotNull>
+			<isNotNull prepend="," property="video_fileId"> video_fileId </isNotNull>
+			<isNotNull prepend="," property="audio_fileId"> audio_fileId </isNotNull>
+			<isNotNull prepend="," property="video_state"> video_state </isNotNull>
+			<isNotNull prepend="," property="audio_state"> audio_state </isNotNull>
+			<isNotNull prepend="," property="video_play"> video_play </isNotNull>
+			<isNotNull prepend="," property="audio_play"> audio_play </isNotNull>
+        </dynamic>
+        )
+        VALUES (
+        <dynamic prepend="">
+		    <isNotNull prepend="" property="name"> #name# </isNotNull>
+		    <isNotNull prepend="," property="code"> #code# </isNotNull>
+		    <isNotNull prepend="," property="classify_id"> #classify_id# </isNotNull>
+		    <isNotNull prepend="," property="img_url"> #img_url# </isNotNull>
+		    <isNotNull prepend="," property="video_url"> #video_url# </isNotNull>
+		    <isNotNull prepend="," property="mp3_url"> #mp3_url# </isNotNull>
+		    <isNotNull prepend="," property="info"> #info# </isNotNull>
+		    <isNotNull prepend="," property="when_long"> #when_long# </isNotNull>
+		    <isNotNull prepend="," property="sort_id"> #sort_id# </isNotNull>
+		    <isNotNull prepend="," property="video_fileId"> #video_fileId# </isNotNull>
+		    <isNotNull prepend="," property="audio_fileId"> #audio_fileId# </isNotNull>
+		    <isNotNull prepend="," property="video_state"> #video_state# </isNotNull>
+		    <isNotNull prepend="," property="audio_state"> #audio_state# </isNotNull>
+		    <isNotNull prepend="," property="video_play"> #video_play# </isNotNull>
+		    <isNotNull prepend="," property="audio_play"> #audio_play# </isNotNull>
+        </dynamic>
+        )
+        <selectKey keyProperty="id" resultClass="long">
+			SELECT @@IDENTITY AS id 
+		</selectKey>
+    </insert>
+
+    <update id="updateYyCourse">
+        UPDATE yy_course
+        <dynamic prepend="SET">
+		    <isNotNull prepend="," property="name"> name=#name# </isNotNull>
+		    <isNotNull prepend="," property="code"> code=#code# </isNotNull>
+		    <isNotNull prepend="," property="classify_id"> classify_id=#classify_id# </isNotNull>
+		    <isNotNull prepend="," property="img_url"> img_url=#img_url# </isNotNull>
+		    <isNotNull prepend="," property="video_url"> video_url=#video_url# </isNotNull>
+		    <isNotNull prepend="," property="mp3_url"> mp3_url=#mp3_url# </isNotNull>
+		    <isNotNull prepend="," property="info"> info=#info# </isNotNull>
+		    <isNotNull prepend="," property="when_long"> when_long=#when_long# </isNotNull>
+		    <isNotNull prepend="," property="sort_id"> sort_id=#sort_id# </isNotNull>
+		    <isNotNull prepend="," property="video_fileId"> video_fileId=#video_fileId# </isNotNull>
+		    <isNotNull prepend="," property="audio_fileId"> audio_fileId=#audio_fileId# </isNotNull>
+		    <isNotNull prepend="," property="video_state"> video_state=#video_state# </isNotNull>
+		    <isNotNull prepend="," property="audio_state"> audio_state=#audio_state# </isNotNull>
+		    <isNotNull prepend="," property="video_play"> video_play=#video_play# </isNotNull>
+		    <isNotNull prepend="," property="audio_play"> audio_play=#audio_play# </isNotNull>
+        </dynamic>
+    	where id = #id#
+    </update>
+    
+    <delete id="removeYyCourse">
+        delete from yy_course where id = #id#
+    </delete>
+    
+    <select id="getYyCourseListByFunction" parameterClass="YyCourse" resultClass="YyCourse">
+    	SELECT a.*  FROM yy_course a 
+    	left join yy_course_function b on a.classify_id = b.course_classify_id
+    	where b.function_id = #function_id#
+    </select>
+    
+    <select id="getYyCourseListByClassify" parameterClass="YyCourse" resultClass="YyCourse">
+        SELECT a.*,lesson.name as lesson_name,module.id as module_id,module.name as module_name,
+        theme.id as theme_id,theme.name as theme_name
+        
+        FROM yy_course a
+        left join yy_course_classify lesson on a.classify_id = lesson.id
+        left join yy_course_classify module on lesson.parent_id = module.id
+        left join yy_course_classify theme on module.parent_id = theme.id
+		<dynamic prepend="WHERE">
+       		<isNotNull prepend="AND" property="id"> a.id=#id# </isNotNull>
+       		<isNotNull prepend="AND" property="name"> a.name=#name# </isNotNull>
+       		<isNotNull prepend="AND" property="code"> a.code=#code# </isNotNull>
+       		<isNotNull prepend="AND" property="classify_id"> a.classify_id=#classify_id# </isNotNull>
+       		<isNotNull prepend="AND" property="img_url"> a.img_url=#img_url# </isNotNull>
+       		<isNotNull prepend="AND" property="video_url"> a.video_url=#video_url# </isNotNull>
+       		<isNotNull prepend="AND" property="mp3_url"> a.mp3_url=#mp3_url# </isNotNull>
+       		<isNotNull prepend="AND" property="info"> a.info=#info# </isNotNull>
+       		<isNotNull prepend="AND" property="when_long"> a.when_long=#when_long# </isNotNull>
+       		<isNotNull prepend="AND" property="sort_id"> a.sort_id=#sort_id# </isNotNull>
+       		<isNotNull prepend="AND" property="video_fileId"> a.video_fileId=#video_fileId# </isNotNull>
+       		<isNotNull prepend="AND" property="audio_fileId"> a.audio_fileId=#audio_fileId# </isNotNull>
+       		<isNotNull prepend="AND" property="video_state"> a.video_state=#video_state# </isNotNull>
+       		<isNotNull prepend="AND" property="audio_state"> a.audio_state=#audio_state# </isNotNull>
+       		<isNotNull prepend="AND" property="video_play"> a.video_play=#video_play# </isNotNull>
+       		<isNotNull prepend="AND" property="audio_play"> a.audio_play=#audio_play# </isNotNull>
+       		<isNotNull prepend="AND" property="module_id"> module.id=#module_id# </isNotNull>
+       		<isNotNull prepend="AND" property="theme_id"> theme.id=#theme_id# </isNotNull>
+       		<isNotNull prepend="AND" property="otherId"> a.id <![CDATA[ <> ]]> #otherId# </isNotNull>
+		</dynamic>
+        <isNotNull prepend="" property="sortColumn"> order by $sortColumn$ </isNotNull>
+    </select>
+    
+    <select id="getYyCourseTotal" parameterClass="YyCourse" resultClass="YyCourse">
+        SELECT if(count(*) is null,0,count(*)) as total_number,if(sum(a.when_long) is null,0,sum(a.when_long)) as  when_long,a.classify_id  FROM yy_course a
+        left join yy_course_classify lesson on a.classify_id = lesson.id
+		<dynamic prepend="WHERE">
+       		<isNotNull prepend="AND" property="id"> a.id=#id# </isNotNull>
+       		<isNotNull prepend="AND" property="name"> a.name=#name# </isNotNull>
+       		<isNotNull prepend="AND" property="code"> a.code=#code# </isNotNull>
+       		<isNotNull prepend="AND" property="classify_id"> a.classify_id=#classify_id# </isNotNull>
+       		<isNotNull prepend="AND" property="img_url"> a.img_url=#img_url# </isNotNull>
+       		<isNotNull prepend="AND" property="video_url"> a.video_url=#video_url# </isNotNull>
+       		<isNotNull prepend="AND" property="mp3_url"> a.mp3_url=#mp3_url# </isNotNull>
+       		<isNotNull prepend="AND" property="info"> a.info=#info# </isNotNull>
+       		<isNotNull prepend="AND" property="when_long"> a.when_long=#when_long# </isNotNull>
+       		<isNotNull prepend="AND" property="sort_id"> a.sort_id=#sort_id# </isNotNull>
+       		<isNotNull prepend="AND" property="video_fileId"> a.video_fileId=#video_fileId# </isNotNull>
+       		<isNotNull prepend="AND" property="audio_fileId"> a.audio_fileId=#audio_fileId# </isNotNull>
+       		<isNotNull prepend="AND" property="video_state"> a.video_state=#video_state# </isNotNull>
+       		<isNotNull prepend="AND" property="audio_state"> a.audio_state=#audio_state# </isNotNull>
+       		<isNotNull prepend="AND" property="video_play"> a.video_play=#video_play# </isNotNull>
+       		<isNotNull prepend="AND" property="audio_play"> a.audio_play=#audio_play# </isNotNull>
+       		<isNotNull prepend="AND" property="module_id"> lesson.parent_id=#module_id# </isNotNull>
+       		<isNotNull prepend="AND" property="otherId"> a.id <![CDATA[ <> ]]> #otherId# </isNotNull>
+		</dynamic>
+		group by a.classify_id
+    </select>
+    
+    <select id="getYyCourseListByFunctionS" parameterClass="YyCourse" resultClass="YyCourse">
+    	SELECT a.*  FROM yy_course a 
+    	left join yy_course_function b on a.classify_id = b.course_classify_id
+    	where b.function_id in ($function_ids$) group by a.classify_id
+    </select>
+    
+</sqlMap>

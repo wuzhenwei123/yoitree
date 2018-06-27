@@ -1,0 +1,373 @@
+
+.edit_staff{
+    width:584px;
+    margin: 68px auto;
+    position: relative;
+}
+.edit_staff h3{
+    font-size: 20px;
+    text-align: center;
+    font-weight: normal;
+}
+.edit_s{
+    padding-left:48px;
+}
+.edit_title{
+    margin-top:45px;
+    font-size: 16px;
+    text-align: left;
+    color: #2c7ec2;
+    position: relative;
+    margin-bottom:21px;
+}
+.edit_title i{
+    width:32px;
+    height:32px;
+    position: absolute;
+    top:-4px;
+    left:-48px;
+    border: solid 2px #2c7ec2;
+    border-radius: 50%;
+    color: #2c7ec2;
+    font-size: 20px;
+    line-height:32px;
+    text-align: center;
+}
+.edit_staff label{
+    display: inline-block;
+    width:100px;
+    font-size: 14px;
+    color: #a4a4a4;
+}
+.edit_staff input,.btn_date{
+    width: 420px;
+    height: 40px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    border: solid 1px #d8d8d8;
+    margin-bottom: 16px;
+    padding: 0 5px 0 5px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #515358;
+}
+.edit_staff  .btn_date{
+    display: inline-block;
+    width:385px;
+    padding: 0 40px 0 5px;
+    background: url("../../images/newweb/rili.png") 400px center no-repeat;
+    -webkit-background-size: 20px 20px;
+    background-size: 20px 20px;
+    cursor: pointer;
+}
+.edit_phone{
+    position: relative;
+    top:-10px;
+}
+.edit_phone i{
+    position: absolute;
+    top:20px;
+    left:0;
+    font-size: 12px;
+}
+.check_box{
+    height:44px;
+    display: inline-block;
+    vertical-align: middle;
+    padding-top:14px;
+}
+.check_box span{
+    float: left;
+    font-size:14px;
+    color: #a4a4a4;
+    margin-right:60px;
+    cursor: pointer;
+}
+.check_box .active s{
+    border-color: #2c7ec2;
+    background: url("../../images/newweb/dian.png") center no-repeat;
+}
+.check_box span s{
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    border: solid 1px #d8d8d8;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin:0 16px 0 8px;
+}
+.btn_box{
+    float: right;
+    margin:40px 0;
+}
+.btn_box a{
+    display: inline-block;
+    width:152px;
+    height: 38px;
+    line-height:38px;
+    border-radius: 3px;
+    font-size: 14px;
+    text-align: center;
+}
+.btn_cancel{
+    border: solid 1px #a4a4a4;
+    color: #a4a4a4;
+    margin-right:16px;
+}
+.btn_ok{
+    background-color: #2c7ec2;
+    color: #ffffff;
+}
+.title{
+    font-size: 20px;
+    font-weight: 500;
+    text-align: left;
+    color: #4a4a4a;
+    line-height:40px;
+    margin-right:64px;
+}
+.btn{
+    width:152px;
+    height: 40px;
+    line-height:40px;
+    border-radius: 3px;
+    background-color: #2c7ec2;
+    color: #ffffff;
+    font-size: 14px;
+    text-align: center;
+}
+.icon{
+    vertical-align: middle;
+    margin-right:10px;
+    width: 16px;
+    height: 16px;
+}
+.staff_top{
+    margin-top:24px;
+}
+.staff_top label,.f_sort label{
+    font-size: 14px;
+    color: #a4a4a4;
+    margin-right:16px;
+}
+.staff_top input,.f_sort input{
+    width: 152px;
+    height: 40px;
+    padding: 0 40px 0 16px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    border: solid 1px #d8d8d8;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #515358;
+}
+.staff_top .fl{
+    margin-right:16px;
+}
+.staff_top .fr{
+    width:34%;
+    height:42px;
+    text-align: right;
+    position: relative;
+}
+.staff_top .fr i{
+    position: absolute;
+    top:12px;
+    left:50%;
+    margin-left:-37px;
+    color: #A4A4A4;
+    font-size:14px;
+}
+.staff_top .search{
+    position: absolute;
+    top: 0;
+    right:0;
+    background: transparent;
+    width:80%;
+    text-align: center;
+}
+.staff_con{
+    margin-top:16px;
+    margin-bottom: 120px;
+}
+.staff_title{
+    padding: 8px 0;
+    border-bottom: 2px solid #a4a4a4;
+}
+.st_ll{
+    width:13.4%;
+}
+.st_l {
+    width:8.5%;
+}
+.st_x{
+    width:100px;
+}
+.st_m{
+    width:5%;
+}
+.staff_title i{
+    display: inline-block;
+    vertical-align: top;
+    background: url("../../images/newweb/moren.png") center no-repeat;
+    width:20px;
+    height:20px;
+}
+.staff_title .up{
+    background: url("../../images/newweb/shang.png") center no-repeat;
+}
+.staff_title .down{
+    background: url("../../images/newweb/xia.png") center no-repeat;
+}
+.staff_con li{
+    float: left;
+}
+.staff_title li a{
+    color: #a4a4a4;
+    height:20px;
+    line-height:20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.st_name{
+    text-align: center;
+}
+.st_cname{
+    background: #ffffff;
+}
+.st_cname a{
+    padding-left:15px;
+    display: block;
+    height:64px;
+    line-height:64px;
+    font-weight:bold;
+}
+.st_cname a i{
+    width:26px;
+    height:64px;
+    display: inline-block;
+    vertical-align: middle;
+    background-size: 16px 16px;
+}
+.ic_admin{
+    background: url("../../images/newweb/administrator.png") center no-repeat;
+}
+.staff_con dd li{
+    height:64px;
+    line-height:64px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    color: #4a4a4a;
+    border-bottom: solid 2px #e7e7e7;
+    position: relative;
+}
+.btn_more{
+    display: block;
+    width:100%;
+    text-align: center;
+}
+.btn_more img{
+    width:16px;
+    height:16px;
+}
+.st_box{
+    width:150px;
+    padding: 8px 0;
+    border: 1px solid #e4e4e4;
+    position: absolute;
+    top:50px;
+    left:-70px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
+    z-index:9;
+    display: none;
+}
+.st_box::before{
+    content: '';
+    width:18px;
+    height:9px;
+    position: absolute;
+    top:-9px;
+    right:20px;
+    background: url("../../images/newweb/banj_sj.png") center no-repeat;
+
+}
+.st_box a{
+    display: block;
+    padding: 0 24px;
+    height:38px;
+    line-height:38px;
+    font-size: 16px;
+    color: #2c7ec2;
+}
+.st_box a:hover{
+    background-color: #e7e7e7;
+}
+.st_box .btn_disable{
+    color: #d40a3e;
+}
+.staff_organ .st_name{
+    text-align: left;
+}
+.staff_organ .st_name a{
+    margin-left: 32px;
+}
+.staff_organ >dl >dd>.staff_list{
+    margin-left: 0;
+}
+.staff_list{
+    position: relative;
+    margin-left:18px;
+    display: none;
+}
+.staff_list .st_cname a{
+    margin-left:34px;
+}
+.staff_list::after{
+    content: '';
+    position: absolute;
+    top:10%;
+    height:80%;
+    left:17px;
+    width:16px;
+    background: #ffffff;
+}
+.line{
+    position: absolute;
+    top:26px;
+    left: 0;
+    width:16px;
+    display: block;
+    height:100%;
+    background: #ffffff;
+    border-right:1px solid #d8d8d8;
+    z-index:1;
+}
+.line::before ,.line::after{
+    content: '';
+    position: absolute;
+    left: 17px;
+    width: 17px;
+    height: 66px;
+    background: #ffffff;
+
+}
+.line::after{
+    bottom:0;
+    left: 0;
+    height:52px;
+}
+.js_unfold s{
+    display: inline-block;
+    width:16px;
+    height:64px;
+    background: url("../../images/newweb/hebing.png") center no-repeat;
+    vertical-align: middle;
+}
+.open{
+    background: #f9f9f9;
+}
+.open s{
+    background: url("../../images/newweb/zhankai.png") center no-repeat;
+}

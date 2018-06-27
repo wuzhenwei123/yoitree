@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="ManageIpScs">
+	<typeAlias alias="ManageIpScs" type="com.sys.manageIpScs.model.ManageIpScs"/>
+	
+    <sql id="getManageIpScsList_body">
+    	<dynamic prepend="WHERE">
+       		<isNotNull prepend="AND" property="id"> a.id=#id# </isNotNull>
+       		<isNotNull prepend="AND" property="requestIP"> a.requestIP=#requestIP# </isNotNull>
+       		<isNotNull prepend="AND" property="requestCount"> a.requestCount=#requestCount# </isNotNull>
+       		<isNotNull prepend="AND" property="requestDateTime"> a.requestDateTime=#requestDateTime# </isNotNull>
+		</dynamic>
+        <isNotNull prepend="" property="sortColumn"> order by $sortColumn$ </isNotNull>
+    </sql>
+
+    <select id="getManageIpScsListCount" resultClass="int">
+         SELECT COUNT(*) FROM manage_ip_scs a
+		<include refid="getManageIpScsList_body" />
+    </select>
+
+    <select id="getManageIpScsList" parameterClass="ManageIpScs" resultClass="ManageIpScs">
+    	SELECT a.id,a.requestIP,a.requestCount,a.requestDateTime        FROM manage_ip_scs a
+		<include refid="getManageIpScsList_body" />
+        limit #rowStart# , #rowCount# 
+    </select>
+
+    <select id="getManageIpScs" parameterClass="ManageIpScs" resultClass="ManageIpScs">
+        SELECT a.id,a.requestIP,a.requestCount,a.requestDateTime        FROM manage_ip_scs a
+		<include refid="getManageIpScsList_body" />
+    </select>
+
+    <insert id="insertManageIpScs">
+        INSERT INTO manage_ip_scs ( 
+        <dynamic prepend="">
+			<isNotNull prepend="" property="requestIP"> requestIP </isNotNull>
+			<isNotNull prepend="," property="requestCount"> requestCount </isNotNull>
+			<isNotNull prepend="," property="requestDateTime"> requestDateTime </isNotNull>
+        </dynamic>
+        )
+        VALUES (
+        <dynamic prepend="">
+		    <isNotNull prepend="" property="requestIP"> #requestIP# </isNotNull>
+		    <isNotNull prepend="," property="requestCount"> #requestCount# </isNotNull>
+		    <isNotNull prepend="," property="requestDateTime"> #requestDateTime# </isNotNull>
+        </dynamic>
+        )
+        <selectKey keyProperty="id" resultClass="int">
+			SELECT @@IDENTITY AS id 
+		</selectKey>
+    </insert>
+
+    <update id="updateManageIpScs">
+        UPDATE manage_ip_scs
+        <dynamic prepend="SET">
+		    <isNotNull prepend="," property="requestIP"> requestIP=#requestIP# </isNotNull>
+		    <isNotNull prepend="," property="requestCount"> requestCount=#requestCount# </isNotNull>
+		    <isNotNull prepend="," property="requestDateTime"> requestDateTime=#requestDateTime# </isNotNull>
+        </dynamic>
+    	where id = #id#
+    </update>
+    
+    <delete id="removeManageIpScs">
+        delete from manage_ip_scs where id = #id#
+    </delete>
+</sqlMap>

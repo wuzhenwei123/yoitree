@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="YyCompanyLearnStyle">
+	<typeAlias alias="YyCompanyLearnStyle" type="com.yy.yyCompanyLearnStyle.model.YyCompanyLearnStyle"/>
+	
+    <sql id="getYyCompanyLearnStyleList_body">
+    	<dynamic prepend="WHERE">
+       		<isNotNull prepend="AND" property="id"> a.id=#id# </isNotNull>
+       		<isNotNull prepend="AND" property="company_id"> a.company_id=#company_id# </isNotNull>
+       		<isNotNull prepend="AND" property="learning_style_id"> a.learning_style_id=#learning_style_id# </isNotNull>
+		</dynamic>
+        <isNotNull prepend="" property="sortColumn"> order by $sortColumn$ </isNotNull>
+    </sql>
+
+    <select id="getYyCompanyLearnStyleListCount" resultClass="int">
+         SELECT COUNT(*) FROM yy_company_learn_style a
+         left join yy_learning_style b on a.learning_style_id = b.id
+		<include refid="getYyCompanyLearnStyleList_body" />
+    </select>
+
+    <select id="getYyCompanyLearnStyleList" parameterClass="YyCompanyLearnStyle" resultClass="YyCompanyLearnStyle">
+    	SELECT a.id,a.company_id,a.learning_style_id,b.name as learning_style_name        FROM yy_company_learn_style a
+    	 left join yy_learning_style b on a.learning_style_id = b.id
+		<include refid="getYyCompanyLearnStyleList_body" />
+        limit #rowStart# , #rowCount# 
+    </select>
+
+    <select id="getYyCompanyLearnStyle" parameterClass="YyCompanyLearnStyle" resultClass="YyCompanyLearnStyle">
+        SELECT a.id,a.company_id,a.learning_style_id,b.name as learning_style_name        FROM yy_company_learn_style a
+         left join yy_learning_style b on a.learning_style_id = b.id
+		<include refid="getYyCompanyLearnStyleList_body" />
+    </select>
+
+    <insert id="insertYyCompanyLearnStyle">
+        INSERT INTO yy_company_learn_style ( 
+        <dynamic prepend="">
+			<isNotNull prepend="" property="company_id"> company_id </isNotNull>
+			<isNotNull prepend="," property="learning_style_id"> learning_style_id </isNotNull>
+        </dynamic>
+        )
+        VALUES (
+        <dynamic prepend="">
+		    <isNotNull prepend="" property="company_id"> #company_id# </isNotNull>
+		    <isNotNull prepend="," property="learning_style_id"> #learning_style_id# </isNotNull>
+        </dynamic>
+        )
+        <selectKey keyProperty="id" resultClass="long">
+			SELECT @@IDENTITY AS id 
+		</selectKey>
+    </insert>
+
+    <update id="updateYyCompanyLearnStyle">
+        UPDATE yy_company_learn_style
+        <dynamic prepend="SET">
+		    <isNotNull prepend="," property="company_id"> company_id=#company_id# </isNotNull>
+		    <isNotNull prepend="," property="learning_style_id"> learning_style_id=#learning_style_id# </isNotNull>
+        </dynamic>
+    	where id = #id#
+    </update>
+    
+    <delete id="removeYyCompanyLearnStyle">
+        delete from yy_company_learn_style where id = #id#
+    </delete>
+</sqlMap>
